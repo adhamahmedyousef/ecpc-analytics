@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 Run the application:
 
-python app.py
+python app/app.py
 
 Open in browser:
 
