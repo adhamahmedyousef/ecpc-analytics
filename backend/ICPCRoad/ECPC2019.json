@@ -1,0 +1,22 @@
+{
+    "year": 2018,
+    "day": 1,
+    "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/479241",
+    "total_problems": 13,
+    "stage": "final",
+    "problems": [
+      {"letter":"A","name":"Zeros and Ones","solvers":18,"attempts":57,"solve_rate":31.6,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["Combinatorics"]},
+      {"letter":"B","name":"The first task","solvers":48,"attempts":95,"solve_rate":50.5,"difficulty":"Hard","primary_topic":"Greedy","secondary_topics":["Sorting"]},
+      {"letter":"C","name":"Array transformation","solvers":11,"attempts":19,"solve_rate":57.9,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Greedy"]},
+      {"letter":"D","name":"The Millennium Prize Problems","solvers":23,"attempts":33,"solve_rate":69.7,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Math"]},
+      {"letter":"E","name":"Count permutations","solvers":7,"attempts":11,"solve_rate":63.6,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Combinatorics"]},
+      {"letter":"F","name":"MO Salah running down the wing","solvers":131,"attempts":157,"solve_rate":83.4,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Implementation"]},
+      {"letter":"G","name":"Robots race","solvers":2,"attempts":4,"solve_rate":50.0,"difficulty":"Hard","primary_topic":"Graph","secondary_topics":["Minimum Spanning Tree","Data Structures"]},
+      {"letter":"H","name":"Find the path","solvers":30,"attempts":38,"solve_rate":78.9,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["Binary Search","Greedy"]},
+      {"letter":"I","name":"A sky full of stars","solvers":18,"attempts":28,"solve_rate":64.3,"difficulty":"Medium","primary_topic":"Geometry","secondary_topics":["Math"]},
+      {"letter":"J","name":"The test cases","solvers":6,"attempts":8,"solve_rate":75.0,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Constructive Algorithms"]},
+      {"letter":"K","name":"Crazy queries","solvers":5,"attempts":6,"solve_rate":83.3,"difficulty":"Easy","primary_topic":"Strings","secondary_topics":["Probability","Prefix Sum"]},
+      {"letter":"L","name":"Reflection","solvers":16,"attempts":18,"solve_rate":88.9,"difficulty":"Easy","primary_topic":"Data Structures","secondary_topics":["Simulation"]},
+      {"letter":"M","name":"The business man","solvers":14,"attempts":16,"solve_rate":87.5,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Binary Search","Sweep Line"]}
+    ]
+  }

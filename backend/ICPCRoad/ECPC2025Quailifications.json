@@ -1,0 +1,167 @@
+{
+    "title": "ECPC2025_Qualifications",
+    "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/622715",
+    "days": [
+      {
+        "day": 1,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/622715",
+        "problems": [
+          {"letter":"A","name":"Problem Express","solvers":928,"attempts":936,"solve_rate":99.1,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Basic Math","Subtraction"],"global_index":"2025-Q-D1-A"},
+          {"letter":"B","name":"Oops!…They Did It Again","solvers":280,"attempts":378,"solve_rate":74.1,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Graphs","MST Thinking","Constructive Algorithms","Sorting"],"global_index":"2025-Q-D1-B"},
+          {"letter":"C","name":"Viking Signals","solvers":861,"attempts":871,"solve_rate":98.9,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Implementation","Division","Observation"],"global_index":"2025-Q-D1-C"},
+          {"letter":"D","name":"Temporal Paradox","solvers":225,"attempts":510,"solve_rate":44.1,"difficulty":"Hard","primary_topic":"Game Theory","secondary_topics":["Nim Game","Bit Manipulation","MSB","Grundy Numbers"],"global_index":"2025-Q-D1-D"},
+          {"letter":"E","name":"The Infected Tree","solvers":26,"attempts":33,"solve_rate":78.8,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["Tree Path Queries","Modular Inverse","Math","LCA","Contribution Technique"],"global_index":"2025-Q-D1-E"},
+          {"letter":"F","name":"Saving Energy","solvers":24,"attempts":32,"solve_rate":75.0,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Probability","Expected Value","Cayley's Formula","Spanning Trees","Math"],"global_index":"2025-Q-D1-F"},
+          {"letter":"G","name":"Mansa Musa","solvers":222,"attempts":314,"solve_rate":70.7,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Partitioning","Optimization","Matrix Operations"],"global_index":"2025-Q-D1-G"},
+          {"letter":"H","name":"Lost Library of Córdoba","solvers":202,"attempts":225,"solve_rate":89.8,"difficulty":"Medium","primary_topic":"Strings","secondary_topics":["LCP Array","Suffixes","DSU","Counting","Combinatorics"],"global_index":"2025-Q-D1-H"},
+          {"letter":"I","name":"All Roads Lead to Rome","solvers":612,"attempts":737,"solve_rate":83.0,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Geometry","Math","Optimization","Distance Calculation"],"global_index":"2025-Q-D1-I"},
+          {"letter":"J","name":"Trading Routes","solvers":448,"attempts":750,"solve_rate":59.7,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Prefix/Suffix Max","Range Queries","Optimization","Partitions"],"global_index":"2025-Q-D1-J"},
+          {"letter":"K","name":"Good news, everyone!","solvers":14,"attempts":17,"solve_rate":82.4,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Probability Theory","Expected Value","Random Shuffle Theory","Modular Inverse"],"global_index":"2025-Q-D1-K"},
+          {"letter":"L","name":"The House of Wisdom","solvers":96,"attempts":221,"solve_rate":43.4,"difficulty":"Hard","primary_topic":"Data Structures","secondary_tree":["Segment Tree","Lazy Propagation","Range Queries","Optimization"],"global_index":"2025-Q-D1-L"},
+          {"letter":"M","name":"Samurai Duel","solvers":35,"attempts":55,"solve_rate":63.6,"difficulty":"Very Hard","primary_topic":"Strings","secondary_topics":["Expected Value","KMP/Borders","Probability","Modular Arithmetic"],"global_index":"2025-Q-D1-M"},
+          {"letter":"N","name":"Designing the Wall","solvers":159,"attempts":208,"solve_rate":76.4,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Offline Queries","Fenwick/Segment Tree","Range Maximum Query","Coordinate Compression"],"global_index":"2025-Q-D1-N"}
+        ]
+      },
+      {
+        "day": 2,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/626503",
+        "problems": [
+          { "letter":"A", "name":"Playbox", "solvers":17, "attempts":103, "solve_rate":16.5, "difficulty":"Very Hard", "primary_topic":"Dynamic Programming", "secondary_topics":["Number Theory", "GCD", "Inclusion-Exclusion"], "global_index":"2025-Q-D2-A" },
+          { "letter":"B", "name":"Hollow Night", "solvers":574, "attempts":600, "solve_rate":95.6, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Implementation", "Observation", "Greedy"], "global_index":"2025-Q-D2-B" },
+          { "letter":"C", "name":"Craft and Mine", "solvers":102, "attempts":211, "solve_rate":48.3, "difficulty":"Hard", "primary_topic":"Data Structures", "secondary_topics":["Prefix Sum", "Two Pointers", "Binary Search", "Hash Map"], "global_index":"2025-Q-D2-C" },
+          { "letter":"D", "name":"Mushroom Kingdom", "solvers":604, "attempts":606, "solve_rate":99.7, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Basic Math", "Subtraction"], "global_index":"2025-Q-D2-D" },
+          { "letter":"E", "name":"Six Hours, Six Persons, Six Doors", "solvers":108, "attempts":174, "solve_rate":62.1, "difficulty":"Very Hard", "primary_topic":"Combinatorics", "secondary_topics":["Probability", "Modular Inverse", "Fermat's Little Theorem", "Big Integer Logic"], "global_index":"2025-Q-D2-E" },
+          { "letter":"F", "name":"EarthBound", "solvers":122, "attempts":215, "solve_rate":56.7, "difficulty":"Medium", "primary_topic":"Greedy", "secondary_topics":["Strings", "Sorting", "Constructive Algorithms"], "global_index":"2025-Q-D2-F" },
+          { "letter":"G", "name":"Bitfield Arena", "solvers":185, "attempts":215, "solve_rate":86.0, "difficulty":"Medium", "primary_topic":"Data Structures", "secondary_topics":["Bit Manipulation", "Combinatorics", "Segment Tree", "Contribution Technique"], "global_index":"2025-Q-D2-G" },
+          { "letter":"H", "name":"Permutation Lab", "solvers":10, "attempts":24, "solve_rate":41.7, "difficulty":"Very Hard", "primary_topic":"Graphs", "secondary_topics":["Minimum Cost Flow", "Matching", "Greedy", "Optimization"], "global_index":"2025-Q-D2-H" },
+          { "letter":"I", "name":"Zone Lockdown X", "solvers":123, "attempts":210, "solve_rate":58.6, "difficulty":"Hard", "primary_topic":"Geometry", "secondary_topics":["Smallest Enclosing Circle", "Circle Intersection", "Welzl's Algorithm"], "global_index":"2025-Q-D2-I" },
+          { "letter":"J", "name":"Ancient Nexus Reborn", "solvers":66, "attempts":121, "solve_rate":54.5, "difficulty":"Hard", "primary_topic":"Data Structures", "secondary_topics":["Trees", "Euler Tour", "Number Theory", "Bitset Optimization"], "global_index":"2025-Q-D2-J" },
+          { "letter":"K", "name":"BOOM", "solvers":442, "attempts":513, "solve_rate":86.1, "difficulty":"Easy", "primary_topic":"Greedy", "secondary_topics":["Sorting", "Implementation", "Observation"], "global_index":"2025-Q-D2-K" },
+          { "letter":"L", "name":"Strike and Counter 2", "solvers":267, "attempts":358, "solve_rate":74.6, "difficulty":"Medium", "primary_topic":"Greedy", "secondary_topics":["Sorting", "Two Pointers", "Combinatorics", "Math"], "global_index":"2025-Q-D2-L" },
+          { "letter":"M", "name":"Amogus", "solvers":8, "attempts":41, "solve_rate":19.5, "difficulty":"Very Hard", "primary_topic":"Data Structures", "secondary_topics":["Segment Tree", "Lazy Propagation", "Historical Sums"], "global_index":"2025-Q-D2-M" }
+        ]
+      },
+      {
+        "day": 3,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/626784",
+        "problems": [
+          { "letter":"A", "name":"Tram Math", "solvers":437, "attempts":486, "solve_rate":89.9, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Expression Parsing", "Operator Precedence"], "global_index":"2025-Q-D3-A" },
+          { "letter":"B", "name":"Magical Subtrees", "solvers":14, "attempts":30, "solve_rate":46.7, "difficulty":"Very Hard", "primary_topic":"Number Theory", "secondary_topics":["Trees", "Inclusion-Exclusion", "Mobius Inversion"], "global_index":"2025-Q-D3-B" },
+          { "letter":"C", "name":"Wall Whisper", "solvers":299, "attempts":333, "solve_rate":89.8, "difficulty":"Medium", "primary_topic":"Implementation", "secondary_topics":["Frequency Array", "Greedy"], "global_index":"2025-Q-D3-C" },
+          { "letter":"D", "name":"Ancient Symmetry", "solvers":16, "attempts":22, "solve_rate":72.7, "difficulty":"Very Hard", "primary_topic":"Data Structures", "secondary_topics":["Treap", "Lazy Propagation", "Palindromes"], "global_index":"2025-Q-D3-D" },
+          { "letter":"E", "name":"Bit Bazaar", "solvers":372, "attempts":405, "solve_rate":91.8, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Bit Manipulation", "Binary Representation"], "global_index":"2025-Q-D3-E" },
+          { "letter":"F", "name":"Papyrus Puzzle", "solvers":161, "attempts":212, "solve_rate":75.9, "difficulty":"Hard", "primary_topic":"Data Structures", "secondary_topics":["Trees", "DSU on Tree", "Mo's Algorithm"], "global_index":"2025-Q-D3-F" },
+          { "letter":"G", "name":"The Barber's Equation", "solvers":124, "attempts":198, "solve_rate":62.6, "difficulty":"Medium", "primary_topic":"Number Theory", "secondary_topics":["Equation Factoring", "Divisors Count"], "global_index":"2025-Q-D3-G" },
+          { "letter":"H", "name":"Nile Numbers", "solvers":8, "attempts":21, "solve_rate":38.1, "difficulty":"Very Hard", "primary_topic":"Number Theory", "secondary_topics":["Wilson's Theorem", "Factorials Modulo P"], "global_index":"2025-Q-D3-H" },
+          { "letter":"I", "name":"Basha's Clock", "solvers":424, "attempts":436, "solve_rate":97.2, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Time Manipulation"], "global_index":"2025-Q-D3-I" },
+          { "letter":"J", "name":"Hagras Game", "solvers":82, "attempts":102, "solve_rate":80.4, "difficulty":"Medium", "primary_topic":"Game Theory", "secondary_topics":["Sprague-Grundy Theorem", "Euclidean Algorithm"], "global_index":"2025-Q-D3-J" },
+          { "letter":"K", "name":"Note Removal", "solvers":85, "attempts":115, "solve_rate":73.9, "difficulty":"Hard", "primary_topic":"Dynamic Programming", "secondary_topics":["LIS", "Segment Tree"], "global_index":"2025-Q-D3-K" },
+          { "letter":"L", "name":"Missing Digits", "solvers":218, "attempts":293, "solve_rate":74.4, "difficulty":"Hard", "primary_topic":"Dynamic Programming", "secondary_topics":["Digit DP", "Binary Search"], "global_index":"2025-Q-D3-L" },
+          { "letter":"M", "name":"Khateeb Count", "solvers":45, "attempts":88, "solve_rate":51.1, "difficulty":"Very Hard", "primary_topic":"Dynamic Programming", "secondary_topics":["Digit DP", "Inversion Counting"], "global_index":"2025-Q-D3-M" },
+          { "letter":"N", "name":"Circle of Taste", "solvers":25, "attempts":29, "solve_rate":86.2, "difficulty":"Very Hard", "primary_topic":"Hashing", "secondary_topics":["Prefix Sum", "XOR-Hashing", "Circular Arrays"], "global_index":"2025-Q-D3-N" }
+        ]
+      },
+      {
+        "day": 4,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/627042",
+        "problems": [
+          { "letter":"A", "name":"Omar Khayyam", "solvers":65, "attempts":79, "solve_rate":82.3, "difficulty":"Hard", "primary_topic":"Dynamic Programming", "secondary_topics":["Binary Search", "Intervals"], "global_index":"2025-Q-D4-A" },
+          { "letter":"B", "name":"Al-Khwarizmi's Swap Cipher", "solvers":305, "attempts":327, "solve_rate":93.3, "difficulty":"Easy", "primary_topic":"Greedy", "secondary_topics":["Frequency Array", "Sorting"], "global_index":"2025-Q-D4-B" },
+          { "letter":"C", "name":"Al-Buzjani", "solvers":203, "attempts":258, "solve_rate":78.7, "difficulty":"Medium", "primary_topic":"Combinatorics", "secondary_topics":["Math", "Contribution Technique"], "global_index":"2025-Q-D4-C" },
+          { "letter":"D", "name":"Hbab ask queries", "solvers":102, "attempts":118, "solve_rate":86.4, "difficulty":"Hard", "primary_topic":"Number Theory", "secondary_topics":["Sieve of Eratosthenes", "RMQ"], "global_index":"2025-Q-D4-D" },
+          { "letter":"E", "name":"Ibn Hayyan and the Essence of Transformation", "solvers":6, "attempts":10, "solve_rate":60.0, "difficulty":"Very Hard", "primary_topic":"Combinatorics", "secondary_topics":["Contribution Technique", "Math"], "global_index":"2025-Q-D4-E" },
+          { "letter":"F", "name":"Al-Kindi and the Harmony of Numbers", "solvers":40, "attempts":48, "solve_rate":83.3, "difficulty":"Hard", "primary_topic":"Number Theory", "secondary_topics":["LCM Constraints", "Combinatorics"], "global_index":"2025-Q-D4-F" },
+          { "letter":"G", "name":"Ibn Yunus", "solvers":159, "attempts":221, "solve_rate":71.9, "difficulty":"Medium", "primary_topic":"Number Theory", "secondary_topics":["Bit Manipulation", "GCD Properties"], "global_index":"2025-Q-D4-G" },
+          { "letter":"H", "name":"Ibn Khaldun and the Tapestry of Time", "solvers":22, "attempts":30, "solve_rate":73.3, "difficulty":"Hard", "primary_topic":"String Algorithms", "secondary_topics":["KMP Fail Tree", "Persistent Segment Tree"], "global_index":"2025-Q-D4-H" },
+          { "letter":"I", "name":"Ibn al-Haytham's Missing Grid", "solvers":203, "attempts":294, "solve_rate":69.0, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Algebra", "Geometry"], "global_index":"2025-Q-D4-I" },
+          { "letter":"J", "name":"Dr. Farouk El-Baz's XOR Puzzle", "solvers":146, "attempts":225, "solve_rate":64.9, "difficulty":"Medium", "primary_topic":"Dynamic Programming", "secondary_topics":["Bitmask DP", "Partitions"], "global_index":"2025-Q-D4-J" },
+          { "letter":"K", "name":"The Cautious Thief", "solvers":266, "attempts":303, "solve_rate":87.8, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Simulation Logic", "Implementation"], "global_index":"2025-Q-D4-K" },
+          { "letter":"L", "name":"Zewail's Substring Symphony", "solvers":109, "attempts":188, "solve_rate":57.9, "difficulty":"Hard", "primary_topic":"Data Structures", "secondary_topics":["Segment Tree", "Range Sorting", "Rolling Hash"], "global_index":"2025-Q-D4-L" },
+          { "letter":"M", "name":"Domty Distribution", "solvers":371, "attempts":372, "solve_rate":99.7, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Math", "Modulo Operation"], "global_index":"2025-Q-D4-M" }
+        ]
+      },
+      {
+        "day": 5,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/627262",
+        "problems": [
+          { "letter":"A", "name":"Agents Roulette", "solvers":59, "attempts":66, "solve_rate":89.4, "difficulty":"Hard", "primary_topic":"Math", "secondary_topics":["Probability"], "global_index":"2025-Q-D5-A" },
+          { "letter":"B", "name":"AI-Enhanced Password", "solvers":239, "attempts":253, "solve_rate":94.5, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Strings"], "global_index":"2025-Q-D5-B" },
+          { "letter":"C", "name":"InvNet Disorder Analysis", "solvers":71, "attempts":81, "solve_rate":87.6, "difficulty":"Hard", "primary_topic":"Combinatorics", "secondary_topics":["Mo's Algorithm"], "global_index":"2025-Q-D5-C" },
+          { "letter":"D", "name":"Adaptive Shield Calibration", "solvers":75, "attempts":103, "solve_rate":72.8, "difficulty":"Hard", "primary_topic":"Data Structures", "secondary_topics":["CDQ"], "global_index":"2025-Q-D5-D" },
+          { "letter":"E", "name":"Now You See Me", "solvers":43, "attempts":63, "solve_rate":68.2, "difficulty":"Hard", "primary_topic":"Graph Theory", "secondary_topics":["Tree Properties"], "global_index":"2025-Q-D5-E" },
+          { "letter":"F", "name":"Binary Gem Challenge", "solvers":196, "attempts":207, "solve_rate":94.7, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Binary"], "global_index":"2025-Q-D5-F" },
+          { "letter":"G", "name":"The Fofo-Good Array", "solvers":34, "attempts":45, "solve_rate":75.6, "difficulty":"Hard", "primary_topic":"Number Theory", "secondary_topics":["DP"], "global_index":"2025-Q-D5-G" },
+          { "letter":"H", "name":"Another Piano Problem", "solvers":148, "attempts":165, "solve_rate":89.7, "difficulty":"Medium", "primary_topic":"Constructive", "secondary_topics":["MEX"], "global_index":"2025-Q-D5-H" },
+          { "letter":"I", "name":"Median of Integrity Tree", "solvers":17, "attempts":25, "solve_rate":68.0, "difficulty":"Very Hard", "primary_topic":"DP", "secondary_topics":["Tree DP", "Binary Search"], "global_index":"2025-Q-D5-I" },
+          { "letter":"J", "name":"Nexus Harmony Paths", "solvers":36, "attempts":40, "solve_rate":90.0, "difficulty":"Hard", "primary_topic":"Number Theory", "secondary_topics":["Mobius"], "global_index":"2025-Q-D5-J" },
+          { "letter":"K", "name":"Catch the Phantom", "solvers":3, "attempts":7, "solve_rate":42.9, "difficulty":"Very Hard", "primary_topic":"Math", "secondary_topics":["Expected Value"], "global_index":"2025-Q-D5-K" },
+          { "letter":"L", "name":"Legacy Systems Validation", "solvers":232, "attempts":236, "solve_rate":98.3, "difficulty":"Easy", "primary_topic":"Implementation", "secondary_topics":["Sets"], "global_index":"2025-Q-D5-L" },
+          { "letter":"M", "name":"Resource-Efficient Transactions", "solvers":168, "attempts":202, "solve_rate":83.1, "difficulty":"Easy", "primary_topic":"Math", "secondary_topics":["Greedy"], "global_index":"2025-Q-D5-M" },
+          { "letter":"N", "name":"Adaptive Escape Planning", "solvers":2, "attempts":5, "solve_rate":40.0, "difficulty":"Very Hard", "primary_topic":"DP", "secondary_topics":["Connectivity"], "global_index":"2025-Q-D5-N" },
+          { "letter":"O", "name":"Binary State Debugging", "solvers":113, "attempts":137, "solve_rate":82.5, "difficulty":"Hard", "primary_topic":"Bit Manipulation", "secondary_topics":["Trailing Zeros"], "global_index":"2025-Q-D5-O" }
+        ]
+      },
+      {
+        "day": 6,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/627563",
+        "problems": [
+          {"letter":"A","name":"Hebron's Digital Gate","solvers":88,"attempts":118,"solve_rate":74.6,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Two Pointers","Strings","Big Integer Logic","Implementation"],"global_index":"2025-Q-D6-A"},
+          {"letter":"B","name":"Gaza Knights","solvers":24,"attempts":35,"solve_rate":68.6,"difficulty":"Very Hard","primary_topic":"Greedy","secondary_topics":["Implementation","Chess Logic","Coordinate Compression","Optimization"],"global_index":"2025-Q-D6-B"},
+          {"letter":"C","name":"The Citadel's Alchemist","solvers":166,"attempts":178,"solve_rate":93.3,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Number Theory","Greedy","Prime Factorization","Observation"],"global_index":"2025-Q-D6-C"},
+          {"letter":"D","name":"Khan Al-Umdan T-Shirt","solvers":181,"attempts":181,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Strings","Conditionals"],"global_index":"2025-Q-D6-D"},
+          {"letter":"E","name":"Gaza's Hidden Patterns","solvers":98,"attempts":99,"solve_rate":98.9,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Fenwick Tree","Prefix/Suffix Queries","Frequency Array","Coordinate Compression"],"global_index":"2025-Q-D6-E"},
+          {"letter":"F","name":"Firas Market's Binary Game","solvers":81,"attempts":101,"solve_rate":80.2,"difficulty":"Medium","primary_topic":"Game Theory","secondary_topics":["Nim Game","Bit Manipulation","Binary Numbers","Observation"],"global_index":"2025-Q-D6-F"},
+          {"letter":"G","name":"Ein Karem's Shifting Triangles","solvers":115,"attempts":118,"solve_rate":97.5,"difficulty":"Medium","primary_topic":"Geometry","secondary_topics":["Hashing","Normalization","Sorting","Implementation"],"global_index":"2025-Q-D6-G"},
+          {"letter":"H","name":"Queries in the Streets of Acre","solvers":11,"attempts":21,"solve_rate":52.4,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["DSU","Bitmask","SOS DP","Small-to-Large Merging"],"global_index":"2025-Q-D6-H"},
+          {"letter":"I","name":"Ibrahimi's Cryptic Ratio","solvers":63,"attempts":99,"solve_rate":63.6,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["GCD","Bitwise XOR","Optimization","Math"],"global_index":"2025-Q-D6-I"},
+          {"letter":"J","name":"Jerusalem's Prime Puzzle","solvers":60,"attempts":75,"solve_rate":80.0,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Sieve of Eratosthenes","Greedy","Binary Search","Pre-calculation"],"global_index":"2025-Q-D6-J"},
+          {"letter":"K","name":"Deir al-Balah's Hidden Sequence","solvers":139,"attempts":157,"solve_rate":88.5,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Observation","Constructive Algorithms"],"global_index":"2025-Q-D6-K"},
+          {"letter":"L","name":"Lifta's Hidden Islands","solvers":17,"attempts":25,"solve_rate":68.0,"difficulty":"Hard","primary_topic":"Greedy","secondary_topics":["Simulation","Directed Graphs","Optimization"],"global_index":"2025-Q-D6-L"},
+          {"letter":"M","name":"Bethlehem's Secret Numbers","solvers":6,"attempts":10,"solve_rate":60.0,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["Monotonic Stack","Segment Tree","Contribution Technique","2D Range Queries"],"global_index":"2025-Q-D6-M"},
+          {"letter":"N","name":"Vertical Focus — WideBot's Data-Driven Leap","solvers":111,"attempts":122,"solve_rate":91.0,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Bitmask","Complete Search","Graphs","Synergy Scores"],"global_index":"2025-Q-D6-N"}
+        ]
+      },
+      {
+        "day": 7,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/627564",
+        "problems": [
+          {"letter":"A","name":"Bits and Tricks","solvers":145,"attempts":161,"solve_rate":90.1,"difficulty":"Medium","primary_topic":"Bit Manipulation","secondary_topics":["Bitwise OR","Range Queries","Binary Representation","Implementation"],"global_index":"2025-Q-D7-A"},
+          {"letter":"B","name":"Triple Adjacent Coprimes","solvers":4,"attempts":8,"solve_rate":50.0,"difficulty":"Very Hard","primary_topic":"Dynamic Programming","secondary_topics":["Number Theory","Inclusion-Exclusion","GCD","Combinatorics"],"global_index":"2025-Q-D7-B"},
+          {"letter":"C","name":"Eman's Board","solvers":126,"attempts":167,"solve_rate":75.4,"difficulty":"Medium","primary_topic":"Graphs","secondary_topics":["Greedy","Bipartite Matching Logic","Implementation","Chess Logic"],"global_index":"2025-Q-D7-C"},
+          {"letter":"D","name":"Towering Triumph","solvers":201,"attempts":201,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Basic Math","Conditionals"],"global_index":"2025-Q-D7-D"},
+          {"letter":"E","name":"Easy Counting!","solvers":16,"attempts":34,"solve_rate":47.1,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Bitmask","Number Theory","Pairwise Coprime","Combinatorics"],"global_index":"2025-Q-D7-E"},
+          {"letter":"F","name":"Enta leh d3eef","solvers":120,"attempts":191,"solve_rate":62.8,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["GCD","LCM","Divisors","Math Properties"],"global_index":"2025-Q-D7-F"},
+          {"letter":"G","name":"Mexy Grid","solvers":3,"attempts":10,"solve_rate":30.0,"difficulty":"Very Hard","primary_topic":"Greedy","secondary_topics":["MEX","Implementation","Optimization","Case Analysis"],"global_index":"2025-Q-D7-G"},
+          {"letter":"H","name":"Graph Journey","solvers":55,"attempts":73,"solve_rate":75.3,"difficulty":"Hard","primary_topic":"Graphs","secondary_topics":["Dijkstra","Bitmask DP","Shortest Path","Optimization"],"global_index":"2025-Q-D7-H"},
+          {"letter":"I","name":"Boring Lecture","solvers":57,"attempts":64,"solve_rate":89.1,"difficulty":"Hard","primary_topic":"Graphs","secondary_topics":["Simulation","Priority Queue","Grid Traversal","Shortest Path Logic"],"global_index":"2025-Q-D7-I"},
+          {"letter":"J","name":"The Flipping Parade","solvers":64,"attempts":86,"solve_rate":74.4,"difficulty":"Medium","primary_topic":"Implementation","secondary_topics":["Sorting","Greedy","Math","Parity Logic"],"global_index":"2025-Q-D7-J"},
+          {"letter":"K","name":"Maximum Path Score","solvers":15,"attempts":23,"solve_rate":65.2,"difficulty":"Very Hard","primary_topic":"Graphs","secondary_topics":["Tree DP","Centroid Decomposition","Quadratic Optimization","Math"],"global_index":"2025-Q-D7-K"},
+          {"letter":"L","name":"Maximum Valid Subarrays","solvers":168,"attempts":179,"solve_rate":93.9,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Hashing","Implementation","Subarrays"],"global_index":"2025-Q-D7-L"},
+          {"letter":"M","name":"Once Upon a Common Ancestor","solvers":54,"attempts":69,"solve_rate":78.3,"difficulty":"Hard","primary_topic":"Graphs","secondary_topics":["LCA","Virtual Tree","Tree DP","DFS Order"],"global_index":"2025-Q-D7-M"},
+          {"letter":"N","name":"Top 10 Market Picks — Your Parts' 2026 Expansion Strategy","solvers":177,"attempts":179,"solve_rate":98.9,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Weighted Sum","Implementation"],"global_index":"2025-Q-D7-N"}
+        ]
+      },
+      {
+        "day": 8,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/627871",
+        "problems": [
+          {"letter":"A","name":"Scrolls of Alexandria","solvers":102,"attempts":106,"solve_rate":96.2,"difficulty":"Easy","primary_topic":"Sorting","secondary_topics":["Simulation","Greedy","Implementation"],"global_index":"2025-Q-D8-A"},
+          {"letter":"B","name":"The Tree of Baghdad","solvers":39,"attempts":44,"solve_rate":88.6,"difficulty":"Hard","primary_topic":"Game Theory","secondary_topics":["DFS","Bitwise XOR","Trees","Greedy Strategy"],"global_index":"2025-Q-D8-B"},
+          {"letter":"C","name":"Squares of Cairo","solvers":78,"attempts":80,"solve_rate":97.5,"difficulty":"Easy","primary_topic":"Geometry","secondary_topics":["Brute Force","Grid Searching","Implementation"],"global_index":"2025-Q-D8-C"},
+          {"letter":"D","name":"White Guard — Attack Containment Mission","solvers":2,"attempts":6,"solve_rate":33.3,"difficulty":"Very Hard","primary_topic":"Graphs","secondary_topics":["Network Flow","Min-Cut","Dominator Tree","Optimization"],"global_index":"2025-Q-D8-D"},
+          {"letter":"E","name":"The Factorial Manuscript of Elbasan","solvers":95,"attempts":99,"solve_rate":96.0,"difficulty":"Easy","primary_topic":"Number Theory","secondary_topics":["Factorials","Modular Arithmetic","Precomputation"],"global_index":"2025-Q-D8-E"},
+          {"letter":"F","name":"Networks of Fez","solvers":3,"attempts":5,"solve_rate":60.0,"difficulty":"Very Hard","primary_topic":"Segment Tree","secondary_topics":["Tree Diameter","LCA","Range Queries","Graphs"],"global_index":"2025-Q-D8-F"},
+          {"letter":"G","name":"The Browser of Ghadames","solvers":26,"attempts":32,"solve_rate":81.3,"difficulty":"Hard","primary_topic":"Trees","secondary_topics":["DFS Order","Fenwick Tree","BIT","Tree Flattening"],"global_index":"2025-Q-D8-G"},
+          {"letter":"H","name":"Palindromes of Hama","solvers":56,"attempts":77,"solve_rate":72.7,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Greedy","Prefix Sums","Binary Search","Palindromes"],"global_index":"2025-Q-D8-H"},
+          {"letter":"I","name":"Beautiful Arrays of Ifriqiya","solvers":1,"attempts":4,"solve_rate":25.0,"difficulty":"Very Hard","primary_topic":"Divide and Conquer","secondary_topics":["Monotonic Stack","Segment Tree","Two Pointers","Data Structures"],"global_index":"2025-Q-D8-I"},
+          {"letter":"J","name":"The Records of Jerusalem","solvers":65,"attempts":70,"solve_rate":92.9,"difficulty":"Medium","primary_topic":"Sliding Window","secondary_topics":["Two Pointers","Monotonic Queue","Data Structures","Implementation"],"global_index":"2025-Q-D8-J"},
+          {"letter":"K","name":"Cycles of Kairouan","solvers":5,"attempts":8,"solve_rate":62.5,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Inclusion-Exclusion","Math","Number Theory","Permutations"],"global_index":"2025-Q-D8-K"},
+          {"letter":"L","name":"Even Digits in Latakia","solvers":115,"attempts":117,"solve_rate":98.3,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Conditionals"],"global_index":"2025-Q-D8-L"},
+          {"letter":"M","name":"Bitwise Wisdom of Merv","solvers":36,"attempts":63,"solve_rate":57.1,"difficulty":"Hard","primary_topic":"Bitwise Operations","secondary_topics":["SOS DP","Greedy","Subset Transformation","Implementation"],"global_index":"2025-Q-D8-M"},
+          {"letter":"N","name":"Exponential Mysteries of Nishapur","solvers":26,"attempts":32,"solve_rate":81.3,"difficulty":"Very Hard","primary_topic":"Number Theory","secondary_topics":["Discrete Logarithm","BSGS","Euler's Totient Function","Order of an Element"],"global_index":"2025-Q-D8-N"}
+        ]
+      }
+      
+      
+    ]
+  }

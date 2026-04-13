@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% block title %}Problems Explorer · ECPC Analytics{% endblock %}
+{% block page_title %}Problems Explorer{% endblock %}
+{% block page_subtitle %}Search, filter, and explore all ECPC problems{% endblock %}
+
+{% block content %}
+
+<!-- Filters Bar -->
+<div class="card mb-5">
+  <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 items-end">
+    <div class="col-span-2 sm:col-span-1 lg:col-span-2">
+      <label class="filter-label">Search</label>
+      <input id="filter-q" type="text" placeholder="Problem name or letter…" class="filter-input" />
+    </div>
+    <div>
+      <label class="filter-label">Difficulty</label>
+      <select id="filter-diff" class="filter-input">
+        <option value="">All</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+        <option>Very Hard</option>
+      </select>
+    </div>
+    <div>
+      <label class="filter-label">Topic</label>
+      <select id="filter-topic" class="filter-input">
+        <option value="">All Topics</option>
+      </select>
+    </div>
+    <div>
+      <label class="filter-label">Contest</label>
+      <select id="filter-contest" class="filter-input">
+        <option value="">All Contests</option>
+      </select>
+    </div>
+  </div>
+  <div class="flex items-center justify-between mt-3">
+    <span id="results-count" class="text-xs text-gray-500">Loading…</span>
+    <button onclick="resetFilters()" class="text-xs text-[#e84545] hover:text-red-300 transition-colors">Reset filters</button>
+  </div>
+</div>
+
+<!-- Table -->
+<div class="card">
+  <div class="overflow-x-auto">
+    <table class="data-table" id="problems-main-table">
+      <thead>
+        <tr>
+          <th class="cursor-pointer" onclick="sortBy('letter')">Letter <span id="sort-letter"></span></th>
+          <th class="cursor-pointer" onclick="sortBy('name')">Name <span id="sort-name"></span></th>
+          <th class="cursor-pointer" onclick="sortBy('difficulty')">Difficulty <span id="sort-difficulty"></span></th>
+          <th>Topic</th>
+          <th class="cursor-pointer" onclick="sortBy('solve_rate')">Solve Rate <span id="sort-solve_rate"></span></th>
+          <th class="cursor-pointer" onclick="sortBy('solvers')">Solvers <span id="sort-solvers"></span></th>
+          <th>Contest</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="problems-main-tbody">
+        <tr><td colspan="8" class="text-center text-gray-600 py-10">Loading problems…</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <div class="flex items-center justify-between px-4 py-3 border-t border-[#1e1e2e] mt-2">
+    <button id="prev-page" onclick="changePage(-1)" class="pagination-btn" disabled>← Prev</button>
+    <span id="page-info" class="text-xs text-gray-500">Page 1</span>
+    <button id="next-page" onclick="changePage(1)" class="pagination-btn">Next →</button>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let allProblems = [];
+let filtered = [];
+let currentPage = 1;
+const PAGE_SIZE = 50;
+let sortKey = 'solve_rate';
+let sortDir = 1;
+
+(async function init() {
+  // Populate filter selects
+  const [topicsData, contestsData, problemsData] = await Promise.all([
+    apiFetch('/api/topics'),
+    apiFetch('/api/contests'),
+    apiFetch('/api/problems'),
+  ]);
+
+  if (topicsData) {
+    const sel = document.getElementById('filter-topic');
+    topicsData.slice(0, 60).forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.topic;
+      opt.textContent = `${t.topic} (${t.count})`;
+      sel.appendChild(opt);
+    });
+  }
+
+  if (contestsData) {
+    const sel = document.getElementById('filter-contest');
+    contestsData.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.contest_id;
+      opt.textContent = c.title;
+      sel.appendChild(opt);
+    });
+  }
+
+  if (problemsData) {
+    allProblems = problemsData.items || [];
+    applyFilters();
+  }
+
+  // Filter listeners
+  ['filter-q','filter-diff','filter-topic','filter-contest'].forEach(id => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { currentPage = 1; applyFilters(); });
+    el.addEventListener('change', () => { currentPage = 1; applyFilters(); });
+  });
+})();
+
+function applyFilters() {
+  const q = document.getElementById('filter-q').value.toLowerCase().trim();
+  const diff = document.getElementById('filter-diff').value;
+  const topic = document.getElementById('filter-topic').value.toLowerCase();
+  const contest = document.getElementById('filter-contest').value;
+
+  filtered = allProblems.filter(p => {
+    if (q && !(p.name||'').toLowerCase().includes(q) && !(p.letter||'').toLowerCase().includes(q)) return false;
+    if (diff && (p.difficulty||'') !== diff) return false;
+    if (topic && (p.primary_topic||'').toLowerCase() !== topic && !p.secondary_topics?.some(s => s.toLowerCase() === topic)) return false;
+    if (contest && p.contest_id !== contest) return false;
+    return true;
+  });
+
+  // Sort
+  const diffOrder = {'Easy':0,'Medium':1,'Hard':2,'Very Hard':3};
+  filtered.sort((a, b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey === 'difficulty') { av = diffOrder[av]??99; bv = diffOrder[bv]??99; }
+    if (av == null) av = sortDir > 0 ? Infinity : -Infinity;
+    if (bv == null) bv = sortDir > 0 ? Infinity : -Infinity;
+    if (av < bv) return -1 * sortDir;
+    if (av > bv) return 1 * sortDir;
+    return 0;
+  });
+
+  renderPage();
+}
+
+function renderPage() {
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  currentPage = Math.min(currentPage, totalPages);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const page = filtered.slice(start, start + PAGE_SIZE);
+
+  document.getElementById('results-count').textContent = `${total} problems found`;
+  document.getElementById('page-info').textContent = `Page ${currentPage} / ${totalPages}`;
+  document.getElementById('prev-page').disabled = currentPage <= 1;
+  document.getElementById('next-page').disabled = currentPage >= totalPages;
+
+  const tbody = document.getElementById('problems-main-tbody');
+  if (!page.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-gray-600 py-10">No problems match your filters.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = page.map(p => `
+    <tr class="cursor-pointer hover:bg-[#1a1a28] transition-colors" onclick="window.open('${p.problem_url||'#'}','_blank')">
+      <td><span class="letter-badge">${escHtml(p.letter||'?')}</span></td>
+      <td>
+        <div class="text-gray-200 text-sm">${escHtml(p.name||'Untitled')}</div>
+        ${p.secondary_topics?.length ? `<div class="text-[10px] text-gray-600 mt-0.5">${p.secondary_topics.slice(0,3).map(escHtml).join(', ')}</div>` : ''}
+      </td>
+      <td><span class="diff-badge diff-${(p.difficulty||'unknown').toLowerCase().replace(' ','-')}">${p.difficulty||'?'}</span></td>
+      <td class="text-gray-400 text-xs">${escHtml(p.primary_topic||'—')}</td>
+      <td>${renderRate(p.solve_rate)}</td>
+      <td class="text-gray-400">${p.solvers??'—'}</td>
+      <td class="text-gray-500 text-xs">${escHtml(p.contest_id||'—')}</td>
+      <td><span class="link-btn text-xs">Open ↗</span></td>
+    </tr>
+  `).join('');
+}
+
+function changePage(delta) {
+  currentPage += delta;
+  renderPage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function sortBy(key) {
+  if (sortKey === key) sortDir *= -1;
+  else { sortKey = key; sortDir = 1; }
+  // Update indicators
+  ['letter','name','difficulty','solve_rate','solvers'].forEach(k => {
+    const el = document.getElementById(`sort-${k}`);
+    if (el) el.textContent = k === sortKey ? (sortDir > 0 ? '↑' : '↓') : '';
+  });
+  currentPage = 1;
+  applyFilters();
+}
+
+function resetFilters() {
+  document.getElementById('filter-q').value = '';
+  document.getElementById('filter-diff').value = '';
+  document.getElementById('filter-topic').value = '';
+  document.getElementById('filter-contest').value = '';
+  currentPage = 1;
+  applyFilters();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,122 @@
+{
+    "title": "ECPC2024_Qualifications",
+    "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/537316",
+    "days": [
+      {
+        "day": 1,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/537316",
+        "problems": [
+          {"letter":"A","name":"Al-Quds: A City of Ancient Heritage","solvers":191,"attempts":277,"solve_rate":68.9,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Frequency Counting","Segment Tree","Combinatorics","Dynamic Updates","Range Queries"],"global_index":"2024-Q-D1-A"},
+          {"letter":"B","name":"Bethlehem: Birthplace of Jesus","solvers":196,"attempts":293,"solve_rate":66.9,"difficulty":"Hard","primary_topic":"Segment Tree","secondary_topics":["Lazy Propagation","Range Update","Polynomial Queries","Math","Modular Arithmetic"],"global_index":"2024-Q-D1-B"},
+          {"letter":"C","name":"Cana'an: A Historic Village in Palestine","solvers":998,"attempts":1000,"solve_rate":99.8,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Conditions","Basic"],"global_index":"2024-Q-D1-C"},
+          {"letter":"D","name":"Dar al-Hawa: Historic Neighborhood in Jerusalem","solvers":599,"attempts":665,"solve_rate":90.1,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Geometry","Sequences","Binary Search","Precision"],"global_index":"2024-Q-D1-D"},
+          {"letter":"E","name":"Ein Gedi: Oasis of Natural Beauty","solvers":907,"attempts":917,"solve_rate":98.9,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Grid","Simulation","Counting"],"global_index":"2024-Q-D1-E"},
+          {"letter":"F","name":"Far'un: Ancient Village in Palestine","solvers":719,"attempts":985,"solve_rate":73.0,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Prime Factorization","Exponent Counting","Math","Observation"],"global_index":"2024-Q-D1-F"},
+          {"letter":"G","name":"Gaza City: A Hub of History and Resilience","solvers":59,"attempts":73,"solve_rate":80.8,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Stars and Bars","Dynamic Programming","Inclusion-Exclusion","Precomputation","Factorials"],"global_index":"2024-Q-D1-G"},
+          {"letter":"H","name":"Hebron: A City of Ancient Heritage","solvers":634,"attempts":770,"solve_rate":82.3,"difficulty":"Medium","primary_topic":"Constructive Algorithms","secondary_topics":["Greedy","Permutation","Prefix Sum","Observation"],"global_index":"2024-Q-D1-H"},
+          {"letter":"I","name":"Irbid: A Historical City in Palestine","solvers":96,"attempts":127,"solve_rate":75.6,"difficulty":"Very Hard","primary_topic":"Digit DP","secondary_topics":["Tree DP","DFS","Trie-like Thinking","Combinatorics","Strings"],"global_index":"2024-Q-D1-I"},
+          {"letter":"J","name":"Jericho: The Oldest City in the World","solvers":942,"attempts":950,"solve_rate":99.2,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Conditions","Comparison"],"global_index":"2024-Q-D1-J"},
+          {"letter":"K","name":"Khan Yunis: A Cultural Hub in Gaza","solvers":198,"attempts":272,"solve_rate":72.8,"difficulty":"Medium","primary_topic":"Geometry","secondary_topics":["Circle Intersection","Area","Math","Precision"],"global_index":"2024-Q-D1-K"},
+          {"letter":"L","name":"Lifta: A Historic Village near Jerusalem","solvers":330,"attempts":414,"solve_rate":79.7,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["DFS","Connected Components","Number Theory","Prime Sieve","Counting"],"global_index":"2024-Q-D1-L"},
+          {"letter":"M","name":"Marj Ibn Amer: Historical Plain in Palestine","solvers":10,"attempts":20,"solve_rate":50.0,"difficulty":"Very Hard","primary_topic":"Graph","secondary_topics":["BFS","State Space Search","Simulation","Bitmask","Shortest Path"],"global_index":"2024-Q-D1-M"}
+        ]
+      },
+      {
+        "day": 2,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/537640",
+        "problems": [
+          {"letter":"A","name":"Antiquities of Acre","solvers":861,"attempts":908,"solve_rate":94.8,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Time Conversion","Simulation","Basic Arithmetic"],"global_index":"2024-Q-D2-A"},
+          {"letter":"B","name":"Biblical Journeys in Bethlehem","solvers":14,"attempts":56,"solve_rate":25.0,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Tree DP","Bitmask","Palindrome Checking","DFS","State Compression","Longest Path"],"global_index":"2024-Q-D2-B"},
+          {"letter":"C","name":"Canals of Beersheba","solvers":107,"attempts":159,"solve_rate":67.3,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["Distances","LCA","Game Theory","BFS","Greedy","Observation"],"global_index":"2024-Q-D2-C"},
+          {"letter":"D","name":"Diverse Culture of Al-Khalil","solvers":503,"attempts":626,"solve_rate":80.4,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["0-1 BFS","Grid","Multi-source","Shortest Path","Optimization","Teleportation"],"global_index":"2024-Q-D2-D"},
+          {"letter":"E","name":"Exploration of Jericho's Oases","solvers":12,"attempts":96,"solve_rate":12.5,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Tree DP","Knapsack on Tree","DP Merging","Subtree","Combinatorics","Modulo Arithmetic"],"global_index":"2024-Q-D2-E"},
+          {"letter":"F","name":"Fishing Traditions of Tiberias","solvers":542,"attempts":637,"solve_rate":85.1,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Hash Map","Index Tracking","Circular Shift","Simulation","Lazy Offset","Queries"],"global_index":"2024-Q-D2-F"},
+          {"letter":"G","name":"Gateways of Beisan","solvers":387,"attempts":510,"solve_rate":75.9,"difficulty":"Medium","primary_topic":"Combinatorics","secondary_topics":["Binomial Coefficients","Prime Sieve","Precomputation","Math","Prefix Sum"],"global_index":"2024-Q-D2-G"},
+          {"letter":"H","name":"Harbor Life in Jaffa","solvers":67,"attempts":86,"solve_rate":77.9,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Prime Factorization","Dynamic Programming","Combinatorics","Stars and Bars","Exponent Distribution","Math"],"global_index":"2024-Q-D2-H"},
+          {"letter":"I","name":"Interwoven Cultures of Nablus","solvers":28,"attempts":37,"solve_rate":75.7,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Stars and Bars","Probability","Prefix Sum","Math","Modular Inverse","Counting"],"global_index":"2024-Q-D2-I"},
+          {"letter":"J","name":"Safed: Spiritual Beacon","solvers":647,"attempts":718,"solve_rate":90.1,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["String Manipulation","Two Pointers","Decoding","Simulation","Mapping"],"global_index":"2024-Q-D2-J"},
+          {"letter":"K","name":"Kaleidoscope of Ramla's Diversity","solvers":131,"attempts":220,"solve_rate":59.5,"difficulty":"Hard","primary_topic":"Math","secondary_topics":["Linear Algebra","Matrix Exponentiation","Recurrence","Transformation","Fast Exponentiation","Modular Arithmetic"],"global_index":"2024-Q-D2-K"},
+          {"letter":"L","name":"Logistics of Lod's Connectivity","solvers":247,"attempts":345,"solve_rate":71.6,"difficulty":"Medium","primary_topic":"Sliding Window","secondary_topics":["Circular Array","Prefix Sum","Counting","Two Pointers","Time Simulation","Optimization"],"global_index":"2024-Q-D2-L"},
+          {"letter":"M","name":"Majestic Crossroads Al-Nasserah","solvers":300,"attempts":385,"solve_rate":77.9,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Sorting","Greedy","Priority Queue","Prefix Sum","Simulation","Game Strategy"],"global_index":"2024-Q-D2-M"}
+        ]
+      },
+      {
+        "day": 3,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/537870",
+        "problems": [
+          {"letter":"A","name":"Opening","solvers":680,"attempts":691,"solve_rate":98.4,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Number Theory","Constructive Algorithms","Fractions","Observation","Greedy Construction"],"global_index":"2024-Q-D3-A"},
+          {"letter":"B","name":"Nablus","solvers":40,"attempts":144,"solve_rate":27.8,"difficulty":"Very Hard","primary_topic":"Strings","secondary_topics":["Suffix Array","LCP","String Comparison","Lexicographical Order","RMQ","Advanced Data Structures"],"global_index":"2024-Q-D3-B"},
+          {"letter":"C","name":"Al Khalil","solvers":21,"attempts":29,"solve_rate":72.4,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["DSU on Tree","Small to Large","Intervals","Value Compression","DFS","Data Structures"],"global_index":"2024-Q-D3-C"},
+          {"letter":"D","name":"Gaza","solvers":692,"attempts":695,"solve_rate":99.6,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Parity","Basic Arithmetic","Conditions"],"global_index":"2024-Q-D3-D"},
+          {"letter":"E","name":"Haifa","solvers":16,"attempts":27,"solve_rate":59.3,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Counting","Burnside Lemma","Symmetry","Integer Partitions","Math","Case Analysis"],"global_index":"2024-Q-D3-E"},
+          {"letter":"F","name":"Yafa","solvers":118,"attempts":189,"solve_rate":62.4,"difficulty":"Hard","primary_topic":"Interactive","secondary_topics":["Binary Search","Divide and Conquer","Graph","Queries","Strategy","Information Theory"],"global_index":"2024-Q-D3-F"},
+          {"letter":"G","name":"Jinin","solvers":50,"attempts":56,"solve_rate":89.3,"difficulty":"Hard","primary_topic":"Combinatorics","secondary_topics":["Stars and Bars","Inclusion-Exclusion","DP","Counting","Prefix Sum","Math"],"global_index":"2024-Q-D3-G"},
+          {"letter":"H","name":"Al Ramla","solvers":601,"attempts":661,"solve_rate":90.9,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Time Conversion","Simulation","Brute Force","Clock Arithmetic"],"global_index":"2024-Q-D3-H"},
+          {"letter":"I","name":"Tulkarm","solvers":90,"attempts":145,"solve_rate":62.1,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Greedy","Subarray","Monotonic Stack","Optimization","Prefix Sum","Two Pointers"],"global_index":"2024-Q-D3-I"},
+          {"letter":"J","name":"Jericho - Ariha","solvers":391,"attempts":632,"solve_rate":61.9,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Prime Factorization","GCD","Greedy","Math","Exponent Difference","Simulation"],"global_index":"2024-Q-D3-J"},
+          {"letter":"K","name":"Al Quds","solvers":152,"attempts":196,"solve_rate":77.6,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["Heavy-Light Decomposition","Segment Tree","Offline Queries","Binary Lifting","Prefix Sum","Query Processing"],"global_index":"2024-Q-D3-K"},
+          {"letter":"M","name":"Ramallah","solvers":668,"attempts":671,"solve_rate":99.6,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Comparison","Basic Math","Conditions"],"global_index":"2024-Q-D3-M"},
+          {"letter":"N","name":"Akka","solvers":658,"attempts":673,"solve_rate":97.8,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Two Pointers","Simulation","Game Strategy","Array"],"global_index":"2024-Q-D3-N"}
+        ]
+      },
+      {
+        "day": 4,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/538098",
+        "problems": [
+          {"letter":"A","name":"Al-Quds","solvers":547,"attempts":584,"solve_rate":93.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Comparison","Floating Point","Observation","Basic Arithmetic"],"global_index":"2024-Q-D4-A"},
+          {"letter":"B","name":"Bir Seb'a","solvers":409,"attempts":509,"solve_rate":80.4,"difficulty":"Medium","primary_topic":"Prefix Sum","secondary_topics":["Sorting","Counting","Math","Optimization","Queries","Greedy"],"global_index":"2024-Q-D4-B"},
+          {"letter":"C","name":"Caesarea","solvers":191,"attempts":241,"solve_rate":79.3,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["BFS","Shortest Path","Simulation","State Transitions","Grid","0-1 BFS"],"global_index":"2024-Q-D4-C"},
+          {"letter":"D","name":"Dura","solvers":200,"attempts":231,"solve_rate":86.6,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Lazy Propagation","Bitwise Operations","Range Updates","Optimization","Math"],"global_index":"2024-Q-D4-D"},
+          {"letter":"E","name":"Ein es-Sultan","solvers":178,"attempts":191,"solve_rate":93.2,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Matrix Exponentiation","Graph DP","Transitions","Fast Exponentiation","Combinatorics","Recurrence"],"global_index":"2024-Q-D4-E"},
+          {"letter":"F","name":"Falujah","solvers":304,"attempts":399,"solve_rate":76.2,"difficulty":"Medium","primary_topic":"Bit Manipulation","secondary_topics":["Greedy","XOR","Bitmask","Optimization","Counting Bits","Observation"],"global_index":"2024-Q-D4-F"},
+          {"letter":"G","name":"Gaza","solvers":141,"attempts":165,"solve_rate":85.5,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Binary Representation","Range Queries","Lazy Propagation","Bitmask","Simulation"],"global_index":"2024-Q-D4-G"},
+          {"letter":"H","name":"Haifa","solvers":400,"attempts":543,"solve_rate":73.7,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Sorting","Construction","Two Pointers","Arrangement","Observation","Simulation"],"global_index":"2024-Q-D4-H"},
+          {"letter":"I","name":"Ibrahimi Mosque","solvers":10,"attempts":30,"solve_rate":33.3,"difficulty":"Very Hard","primary_topic":"Combinatorics","secondary_topics":["Strings","Counting","Subsequences","Substrings","Math","Greedy Construction"],"global_index":"2024-Q-D4-I"},
+          {"letter":"J","name":"Jenin","solvers":269,"attempts":359,"solve_rate":74.9,"difficulty":"Medium","primary_topic":"Geometry","secondary_topics":["Sweep Line","Prefix Sum","2D Grid","Compression","Counting","Simulation"],"global_index":"2024-Q-D4-J"},
+          {"letter":"K","name":"Khan Yunis","solvers":74,"attempts":93,"solve_rate":79.6,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Combinatorics","Subsequences","Contribution Technique","Math","Prefix Sum","Greedy"],"global_index":"2024-Q-D4-K"},
+          {"letter":"L","name":"Lifta","solvers":14,"attempts":18,"solve_rate":77.8,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Heavy-Light Decomposition","LCA","Offline Queries","XOR","Difference on Tree","Binary Lifting"],"global_index":"2024-Q-D4-L"},
+          {"letter":"M","name":"Megiddo","solvers":584,"attempts":585,"solve_rate":99.8,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Sorting","Comparison","Basic Math","Median","Observation"],"global_index":"2024-Q-D4-M"}
+        ]
+      },
+      {
+        "day": 5,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/538271",
+        "problems": [
+      {"letter":"A","name":"Ages of Antiquity","solvers":122,"attempts":147,"solve_rate":83.0,"difficulty":"Medium","primary_topic":"Tree","secondary_topics":["LCA","DFS","Number Theory","Divisors","Counting","Frequency Technique"],"global_index":"2024-Q-D5-A"},
+      {"letter":"B","name":"Beneath Beauty","solvers":105,"attempts":130,"solve_rate":80.8,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["LCA","GCD","Number Theory","Binary Lifting","Path Queries","Prime Factorization"],"global_index":"2024-Q-D5-B"},
+      {"letter":"C","name":"Cultural Carvings","solvers":46,"attempts":57,"solve_rate":80.7,"difficulty":"Medium","primary_topic":"Bit Manipulation","secondary_topics":["Bitwise Operations","Counting","Combinatorics","Observation","Pairs Counting"],"global_index":"2024-Q-D5-C"},
+      {"letter":"D","name":"Deep-rooted Diversity","solvers":461,"attempts":551,"solve_rate":83.7,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Prefix Sum","Difference Array","Observation","Max Subsequence"],"global_index":"2024-Q-D5-D"},
+      {"letter":"E","name":"Eternal Sunrises","solvers":304,"attempts":370,"solve_rate":82.2,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Binary Tree","Powers of 2","Geometric Series","Observation","Construction"],"global_index":"2024-Q-D5-E"},
+      {"letter":"F","name":"Fabled Trails","solvers":165,"attempts":231,"solve_rate":71.4,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Graph","Shortest Path","Floyd Warshall","DP on Sequence","Cost Optimization","State Transition"],"global_index":"2024-Q-D5-F"},
+      {"letter":"G","name":"Generational Genius","solvers":224,"attempts":338,"solve_rate":66.3,"difficulty":"Medium","primary_topic":"Strings","secondary_topics":["Contribution Technique","Prefix Sum","Math","Binary Representation","Big Integers","Simulation"],"global_index":"2024-Q-D5-G"},
+      {"letter":"H","name":"Heritage of Hebron","solvers":20,"attempts":33,"solve_rate":60.6,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Mo's Algorithm on Tree","Euler Tour","LCA","DSU on Tree","Frequency Counting","Offline Queries"],"global_index":"2024-Q-D5-H"},
+      {"letter":"I","name":"Ingenious Agriculture","solvers":313,"attempts":368,"solve_rate":85.1,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Prime Factorization","Legendre Formula","Frequency Counting","Queries","Math","Preprocessing"],"global_index":"2024-Q-D5-I"},
+      {"letter":"J","name":"Jewel of Jericho","solvers":3,"attempts":19,"solve_rate":15.8,"difficulty":"Very Hard","primary_topic":"Geometry","secondary_topics":["Line Intersection","Orientation","Segment Relations","Combinatorics","Brute Force Optimization","Precision"],"global_index":"2024-Q-D5-J"},
+      {"letter":"K","name":"Kitchen Kaleidoscope","solvers":50,"attempts":73,"solve_rate":68.5,"difficulty":"Hard","primary_topic":"Math","secondary_topics":["Summation","Combinatorics","Binomial Theorem","Fast Exponentiation","Modular Arithmetic","Observation"],"global_index":"2024-Q-D5-K"},
+      {"letter":"L","name":"Landmark Legacies","solvers":110,"attempts":166,"solve_rate":66.3,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Sorting","Frequency","Lexicographical Order","Maximization","String Processing","Observation"],"global_index":"2024-Q-D5-L"},
+      {"letter":"M","name":"Mesmerizing Jericho","solvers":453,"attempts":483,"solve_rate":93.8,"difficulty":"Easy","primary_topic":"Data Structures","secondary_topics":["Deque","Lazy Shift","Circular Array","Simulation","Queries","Index Mapping"],"global_index":"2024-Q-D5-M"},
+      {"letter":"N","name":"Nablus Nostalgia","solvers":547,"attempts":550,"solve_rate":99.5,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Parity","Conditions","Basic Math"],"global_index":"2024-Q-D5-N"}
+        ]
+      },
+      {
+        "day": 6,
+        "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/538517",
+        "problems": [
+      {"letter":"A","name":"Antiquities of Acre","solvers":12,"attempts":18,"solve_rate":66.7,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Matrix Exponentiation","State Transition","Counting","Combinatorics","Optimization","Modular Arithmetic"],"global_index":"2024-Q-D6-A"},
+      {"letter":"B","name":"Biblical Journeys in Bethlehem","solvers":104,"attempts":148,"solve_rate":70.3,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Trie","Bitwise Operations","XOR","Range Queries","Mo's Algorithm","Offline Queries","Counting"],"global_index":"2024-Q-D6-B"},
+      {"letter":"C","name":"Canals of Beersheba","solvers":472,"attempts":494,"solve_rate":95.5,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Observation","Patterns","Greedy","Constructive","Strings"],"global_index":"2024-Q-D6-C"},
+      {"letter":"D","name":"Diverse Culture of Al-Khalil","solvers":350,"attempts":378,"solve_rate":92.6,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Binary Search","Two Pointers","Observation","Maximization"],"global_index":"2024-Q-D6-D"},
+      {"letter":"E","name":"Exploration of Jericho's Oases","solvers":181,"attempts":267,"solve_rate":67.8,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Permutation Cycles","Binary Lifting","Simulation","Range Minimum Query","Sparse Table","Queries"],"global_index":"2024-Q-D6-E"},
+      {"letter":"F","name":"Fishing Traditions of Tiberias","solvers":17,"attempts":51,"solve_rate":33.3,"difficulty":"Very Hard","primary_topic":"Number Theory","secondary_topics":["Divisors","DP","Combinatorics","Multiplicative Functions","Sieve","Optimization","Counting"],"global_index":"2024-Q-D6-F"},
+      {"letter":"G","name":"Gateways of Beisan","solvers":390,"attempts":452,"solve_rate":86.3,"difficulty":"Easy","primary_topic":"Strings","secondary_topics":["Frequency Counting","Sliding Window","Observation","Greedy"],"global_index":"2024-Q-D6-G"},
+      {"letter":"H","name":"Harbor Life in Jaffa","solvers":1,"attempts":7,"solve_rate":14.3,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Interactive","Path Queries","LCA","Tree Reconstruction","Binary Lifting","Distance Queries","Combinatorics"],"global_index":"2024-Q-D6-H"},
+      {"letter":"I","name":"Interwoven Cultures of Nablus","solvers":96,"attempts":151,"solve_rate":63.6,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Time DP","Greedy","Simulation","Optimization","Two Pointers","Scheduling"],"global_index":"2024-Q-D6-I"},
+      {"letter":"J","name":"Journey in Safed's Mysteries","solvers":325,"attempts":400,"solve_rate":81.3,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Priority Queue","Resource Management","Simulation","Sorting","Optimization"],"global_index":"2024-Q-D6-J"},
+      {"letter":"K","name":"Kaleidoscope of Ramla's Diversity","solvers":82,"attempts":143,"solve_rate":57.3,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Mex Queries","Range Queries","Offline Processing","Bitset","Optimization"],"global_index":"2024-Q-D6-K"},
+      {"letter":"L","name":"Logistics of Lod's Connectivity","solvers":283,"attempts":286,"solve_rate":99.0,"difficulty":"Easy","primary_topic":"Geometry","secondary_topics":["Vectors","Trigonometry","Simulation","Floating Point","Math"],"global_index":"2024-Q-D6-L"},
+      {"letter":"M","name":"Majestic Crossroads Al-Nasserah","solvers":29,"attempts":40,"solve_rate":72.5,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Divisors","Math","Floor/Ceil Tricks","Summation","Optimization","Prime Factorization"],"global_index":"2024-Q-D6-M"},
+      {"letter":"N","name":"Navigation Challenges in Gaza","solvers":429,"attempts":471,"solve_rate":91.1,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Simulation","Patterns","Recurrence","Observation","Cycle Detection"],"global_index":"2024-Q-D6-N"}
+        ]
+      }
+    ]
+  }

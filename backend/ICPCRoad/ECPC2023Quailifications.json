@@ -1,0 +1,203 @@
+{
+  "title": "ECPC2023_Qualifications",
+  "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/532374",
+  "days": [
+    {
+      "day": 1,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/532374",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":385,"attempts":411,"solve_rate":93.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Strings"],"global_index":"2023-Q-D1-A"},
+        {"letter":"B","name":"Bolbitine","solvers":85,"attempts":165,"solve_rate":51.5,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Linear Recurrence","Implementation"],"global_index":"2023-Q-D1-B"},
+        {"letter":"C","name":"Cleopatra","solvers":88,"attempts":156,"solve_rate":56.4,"difficulty":"Medium","primary_topic":"Bitmask","secondary_topics":["XOR","GCD","Data Structures"],"global_index":"2023-Q-D1-C"},
+        {"letter":"D","name":"Djoser","solvers":141,"attempts":214,"solve_rate":65.9,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["Tree","Shortest Path","Greedy"],"global_index":"2023-Q-D1-D"},
+        {"letter":"E","name":"Edfu","solvers":68,"attempts":111,"solve_rate":61.3,"difficulty":"Medium","primary_topic":"Bitmask","secondary_topics":["XOR","Brute Force","Backtracking"],"global_index":"2023-Q-D1-E"},
+        {"letter":"F","name":"Fayoum","solvers":227,"attempts":376,"solve_rate":60.4,"difficulty":"Medium","primary_topic":"Two Pointers","secondary_topics":["Strings","Greedy","Sliding Window"],"global_index":"2023-Q-D1-F"},
+        {"letter":"G","name":"Giza","solvers":38,"attempts":41,"solve_rate":92.7,"difficulty":"Easy","primary_topic":"Graph","secondary_topics":["BFS","State Graph","Shortest Path"],"global_index":"2023-Q-D1-G"},
+        {"letter":"H","name":"Heliopolis","solvers":0,"attempts":4,"solve_rate":0.0,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["DSU on Tree","Frequency Counting","Greedy","Optimization"],"global_index":"2023-Q-D1-H"},
+        {"letter":"I","name":"Imhotep","solvers":18,"attempts":29,"solve_rate":62.1,"difficulty":"Hard","primary_topic":"Combinatorics","secondary_topics":["Digit DP","Counting","K-th Element"],"global_index":"2023-Q-D1-I"},
+        {"letter":"J","name":"Jewels","solvers":279,"attempts":343,"solve_rate":81.3,"difficulty":"Easy","primary_topic":"Bitmask","secondary_topics":["XOR","Math","Observation"],"global_index":"2023-Q-D1-J"},
+        {"letter":"K","name":"Karnak","solvers":265,"attempts":302,"solve_rate":87.7,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Observation","Permutation","Implementation"],"global_index":"2023-Q-D1-K"},
+        {"letter":"L","name":"Luxor","solvers":25,"attempts":34,"solve_rate":73.5,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["Range Queries","OR","Data Structures","Optimization"],"global_index":"2023-Q-D1-L"},
+        {"letter":"M","name":"Hotel","solvers":371,"attempts":371,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Mapping"],"global_index":"2023-Q-D1-M"}
+      ]
+    },
+    {
+      "day": 2,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/534682",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":222,"attempts":358,"solve_rate":62.0,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Greedy","Math","Divisors"],"global_index":"2023-Q-D2-A"},
+        {"letter":"B","name":"Bolbitine","solvers":166,"attempts":218,"solve_rate":76.1,"difficulty":"Medium","primary_topic":"Binary Search","secondary_topics":["Greedy","Math","Simulation"],"global_index":"2023-Q-D2-B"},
+        {"letter":"C","name":"Cleopatra","solvers":214,"attempts":273,"solve_rate":78.4,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["Connected Components","Sorting","Greedy"],"global_index":"2023-Q-D2-C"},
+        {"letter":"D","name":"Djoser (Zoser)","solvers":9,"attempts":37,"solve_rate":24.3,"difficulty":"Hard","primary_topic":"Math","secondary_topics":["Modular Arithmetic","Observation","Optimization"],"global_index":"2023-Q-D2-D"},
+        {"letter":"E","name":"Edfu","solvers":62,"attempts":114,"solve_rate":54.4,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Strings","Greedy","Divisibility"],"global_index":"2023-Q-D2-E"},
+        {"letter":"F","name":"Fayoum","solvers":323,"attempts":328,"solve_rate":98.5,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Implementation","Simulation"],"global_index":"2023-Q-D2-F"},
+        {"letter":"G","name":"Giza","solvers":308,"attempts":332,"solve_rate":92.8,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Strings","Frequency","Math"],"global_index":"2023-Q-D2-G"},
+        {"letter":"H","name":"Heliopolis","solvers":344,"attempts":344,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Divisibility","Observation"],"global_index":"2023-Q-D2-H"},
+        {"letter":"I","name":"Imhotep","solvers":19,"attempts":24,"solve_rate":79.2,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["Linear Basis","XOR","Greedy","Math"],"global_index":"2023-Q-D2-I"},
+        {"letter":"J","name":"Jewels","solvers":69,"attempts":94,"solve_rate":73.4,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Mo's Algorithm","Frequency","Range Queries","Counting"],"global_index":"2023-Q-D2-J"},
+        {"letter":"K","name":"Karnak","solvers":226,"attempts":267,"solve_rate":84.6,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Sieve","Prime Factorization","Prefix Sum"],"global_index":"2023-Q-D2-K"},
+        {"letter":"L","name":"Luxor","solvers":146,"attempts":217,"solve_rate":67.3,"difficulty":"Medium","primary_topic":"Digit DP","secondary_topics":["Math","Counting","Digits"],"global_index":"2023-Q-D2-L"},
+        {"letter":"M","name":"Memphis","solvers":218,"attempts":264,"solve_rate":82.6,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Digit Counting","Prefix Sum","Observation"],"global_index":"2023-Q-D2-M"}
+      ]
+    },
+    {
+      "day": 3,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/532373",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":27,"attempts":44,"solve_rate":61.4,"difficulty":"Medium","primary_topic":"Bitmask","secondary_topics":["XOR","Linear Basis","Math"],"global_index":"2023-Q-D3-A"},
+        {"letter":"B","name":"Bolbitine","solvers":0,"attempts":1,"solve_rate":0.0,"difficulty":"Very Hard","primary_topic":"Dynamic Programming","secondary_topics":["Probability","Expected Value","State Graph"],"global_index":"2023-Q-D3-B"},
+        {"letter":"C","name":"Cleopatra","solvers":255,"attempts":256,"solve_rate":99.6,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math"],"global_index":"2023-Q-D3-C"},
+        {"letter":"D","name":"Djoser (Zoser)","solvers":8,"attempts":27,"solve_rate":29.6,"difficulty":"Hard","primary_topic":"Geometry","secondary_topics":["Combinatorics","Convex Hull","Cross Product"],"global_index":"2023-Q-D3-D"},
+        {"letter":"E","name":"Edfu","solvers":13,"attempts":16,"solve_rate":81.2,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Probability","Number Theory","Prefix Sum"],"global_index":"2023-Q-D3-E"},
+        {"letter":"F","name":"Fayoum","solvers":0,"attempts":6,"solve_rate":0.0,"difficulty":"Very Hard","primary_topic":"Graph","secondary_topics":["BFS","Dijkstra","State Graph","Optimization"],"global_index":"2023-Q-D3-F"},
+        {"letter":"G","name":"Giza","solvers":86,"attempts":100,"solve_rate":86.0,"difficulty":"Easy","primary_topic":"Combinatorics","secondary_topics":["Math","Modular Arithmetic"],"global_index":"2023-Q-D3-G"},
+        {"letter":"H","name":"Heliopolis","solvers":70,"attempts":111,"solve_rate":63.1,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["Transitive Closure","DFS","Reachability"],"global_index":"2023-Q-D3-H"},
+        {"letter":"I","name":"Imhotep","solvers":33,"attempts":83,"solve_rate":39.8,"difficulty":"Hard","primary_topic":"Math","secondary_topics":["Greedy","Brute Force","Precision"],"global_index":"2023-Q-D3-I"},
+        {"letter":"J","name":"Jewels","solvers":211,"attempts":235,"solve_rate":89.8,"difficulty":"Easy","primary_topic":"Number Theory","secondary_topics":["Factorization","Math","Observation"],"global_index":"2023-Q-D3-J"},
+        {"letter":"K","name":"Karnak","solvers":236,"attempts":237,"solve_rate":99.6,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Greedy","Arrays"],"global_index":"2023-Q-D3-K"},
+        {"letter":"L","name":"Luxor","solvers":9,"attempts":11,"solve_rate":81.8,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Greedy","Prime Factorization","Two Pointers"],"global_index":"2023-Q-D3-L"},
+        {"letter":"M","name":"Memphis","solvers":20,"attempts":37,"solve_rate":54.1,"difficulty":"Hard","primary_topic":"Graph","secondary_topics":["Dijkstra","Segment Tree","Range Queries"],"global_index":"2023-Q-D3-M"},
+        {"letter":"N","name":"Nefertiti","solvers":117,"attempts":178,"solve_rate":65.7,"difficulty":"Medium","primary_topic":"Combinatorics","secondary_topics":["Prefix Sum","Number Theory","Counting"],"global_index":"2023-Q-D3-N"}
+      ]
+    },
+    {
+      "day": 4,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/530047",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":310,"attempts":375,"solve_rate":82.7,"difficulty":"Easy","primary_topic":"Two Pointers","secondary_topics":["Sliding Window","Prefix Sum"],"global_index":"2023-Q-D4-A"},
+        {"letter":"B","name":"Bolbitine","solvers":86,"attempts":99,"solve_rate":86.9,"difficulty":"Medium","primary_topic":"Constructive Algorithms","secondary_topics":["Number Theory","GCD","Geometry"],"global_index":"2023-Q-D4-B"},
+        {"letter":"C","name":"Cleopatra","solvers":256,"attempts":279,"solve_rate":91.8,"difficulty":"Easy","primary_topic":"Number Theory","secondary_topics":["Sieve","Prime Factorization","Counting"],"global_index":"2023-Q-D4-C"},
+        {"letter":"D","name":"Djoser","solvers":0,"attempts":10,"solve_rate":0.0,"difficulty":"Very Hard","primary_topic":"Geometry","secondary_topics":["Convex Hull","Manhattan Geometry","Distance Transformation"],"global_index":"2023-Q-D4-D"},
+        {"letter":"E","name":"Edfu","solvers":256,"attempts":350,"solve_rate":73.1,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Knapsack","Subset Sum","Parity"],"global_index":"2023-Q-D4-E"},
+        {"letter":"F","name":"Fayoum","solvers":156,"attempts":195,"solve_rate":80.0,"difficulty":"Medium","primary_topic":"Game Theory","secondary_topics":["Nim Game","Segment Tree","Range Queries"],"global_index":"2023-Q-D4-F"},
+        {"letter":"G","name":"Giza","solvers":69,"attempts":111,"solve_rate":62.2,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Sorting","Simulation","Optimization"],"global_index":"2023-Q-D4-G"},
+        {"letter":"H","name":"Heliopolis","solvers":11,"attempts":17,"solve_rate":64.7,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Prefix Sum","Matrix","Preprocessing"],"global_index":"2023-Q-D4-H"},
+        {"letter":"I","name":"Imhotep","solvers":203,"attempts":239,"solve_rate":84.9,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Knapsack","Combinatorics","Counting"],"global_index":"2023-Q-D4-I"},
+        {"letter":"J","name":"Jewels","solvers":122,"attempts":172,"solve_rate":70.9,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Ordered Set","Binary Search","Greedy"],"global_index":"2023-Q-D4-J"},
+        {"letter":"K","name":"Karnak","solvers":313,"attempts":326,"solve_rate":96.0,"difficulty":"Easy","primary_topic":"Number Theory","secondary_topics":["GCD","Geometry"],"global_index":"2023-Q-D4-K"},
+        {"letter":"L","name":"Luxor","solvers":419,"attempts":419,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math"],"global_index":"2023-Q-D4-L"},
+        {"letter":"M","name":"Memphis","solvers":4,"attempts":36,"solve_rate":11.1,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["Priority Queue","Simulation","Scheduling"],"global_index":"2023-Q-D4-M"},
+        {"letter":"N","name":"Nefertiti","solvers":146,"attempts":175,"solve_rate":83.4,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Sorting","Priority Queue","Two Pointers"],"global_index":"2023-Q-D4-N"},
+        {"letter":"O","name":"Oases","solvers":341,"attempts":390,"solve_rate":87.4,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Prefix","GCD"],"global_index":"2023-Q-D4-O"}
+      ]
+    },
+    {
+      "day": 5,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/530046",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":344,"attempts":371,"solve_rate":92.7,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Counting","Ceiling Division","Observation"],"global_index":"2023-Q-D5-A"},
+        {"letter":"B","name":"Bolbitine","solvers":61,"attempts":100,"solve_rate":61.0,"difficulty":"Hard","primary_topic":"Prefix Sum","secondary_topics":["Range Queries","Hash Map","Offline Queries","Counting"],"global_index":"2023-Q-D5-B"},
+        {"letter":"C","name":"Cleopatra","solvers":117,"attempts":144,"solve_rate":81.3,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Preprocessing","Brute Force","Optimization","Arrays"],"global_index":"2023-Q-D5-C"},
+        {"letter":"D","name":"Djoser (Zoser)","solvers":71,"attempts":85,"solve_rate":83.5,"difficulty":"Medium","primary_topic":"Two Pointers","secondary_topics":["Number Theory","Prime Factorization","Sliding Window","Greedy"],"global_index":"2023-Q-D5-D"},
+        {"letter":"E","name":"Edfu","solvers":36,"attempts":54,"solve_rate":66.7,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["LCA","Bitmask","XOR","Prefix","Queries"],"global_index":"2023-Q-D5-E"},
+        {"letter":"F","name":"Fayoum","solvers":305,"attempts":325,"solve_rate":93.8,"difficulty":"Easy","primary_topic":"Prefix Sum","secondary_topics":["Difference Array","Simulation","Intervals"],"global_index":"2023-Q-D5-F"},
+        {"letter":"G","name":"Giza","solvers":141,"attempts":220,"solve_rate":64.1,"difficulty":"Medium","primary_topic":"Combinatorics","secondary_topics":["Number Theory","GCD","Dynamic Programming","Counting"],"global_index":"2023-Q-D5-G"},
+        {"letter":"H","name":"Heliopolis","solvers":305,"attempts":325,"solve_rate":93.8,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Grid","Brute Force","Simulation"],"global_index":"2023-Q-D5-H"},
+        {"letter":"I","name":"Imhotep","solvers":31,"attempts":60,"solve_rate":51.7,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["XOR","Combinatorics","Pascal Triangle","Observation"],"global_index":"2023-Q-D5-I"},
+        {"letter":"J","name":"Jewels","solvers":216,"attempts":315,"solve_rate":68.6,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Math","Inversions","Counting","Strings"],"global_index":"2023-Q-D5-J"},
+        {"letter":"K","name":"Karnak","solvers":20,"attempts":56,"solve_rate":35.7,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Greedy","Base Representation","Math","Constructive"],"global_index":"2023-Q-D5-K"},
+        {"letter":"L","name":"Luxor","solvers":3,"attempts":5,"solve_rate":60.0,"difficulty":"Very Hard","primary_topic":"Trie","secondary_topics":["Data Structures","Segment Tree","Heavy-Light","Prefix","Queries"],"global_index":"2023-Q-D5-L"},
+        {"letter":"M","name":"Memphis","solvers":350,"attempts":351,"solve_rate":99.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Condition","Basic"],"global_index":"2023-Q-D5-M"}
+      ]
+    },
+    {
+      "day": 6,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/532378",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":200,"attempts":264,"solve_rate":75.8,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Observation","Geometric Series","Modular Arithmetic"],"global_index":"2023-Q-D6-A"},
+        {"letter":"B","name":"Bolbitine","solvers":106,"attempts":130,"solve_rate":81.5,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Divisors","Multiples","Data Structures","Offline Queries"],"global_index":"2023-Q-D6-B"},
+        {"letter":"C","name":"Cleopatra","solvers":135,"attempts":192,"solve_rate":70.3,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["DAG","Dynamic Programming","Topological Sort","Longest Path"],"global_index":"2023-Q-D6-C"},
+        {"letter":"D","name":"Djoser","solvers":71,"attempts":132,"solve_rate":53.8,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["XOR","Greedy","Brute Force","Observation"],"global_index":"2023-Q-D6-D"},
+        {"letter":"E","name":"Edfu","solvers":286,"attempts":338,"solve_rate":84.6,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Intervals","Sorting","Merging","Two Pointers"],"global_index":"2023-Q-D6-E"},
+        {"letter":"F","name":"Fayoum","solvers":283,"attempts":308,"solve_rate":91.9,"difficulty":"Easy","primary_topic":"Strings","secondary_topics":["Counting","Frequency","Prefix","Observation"],"global_index":"2023-Q-D6-F"},
+        {"letter":"G","name":"Giza","solvers":139,"attempts":237,"solve_rate":58.6,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["DFS","Ancestor","Grouping","Greedy"],"global_index":"2023-Q-D6-G"},
+        {"letter":"H","name":"Heliopolis","solvers":20,"attempts":76,"solve_rate":26.3,"difficulty":"Very Hard","primary_topic":"Strings","secondary_topics":["Frequency","Divisibility","Greedy","Counting"],"global_index":"2023-Q-D6-H"},
+        {"letter":"I","name":"Imhotep","solvers":50,"attempts":83,"solve_rate":60.2,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Perfect Square","Prime Factorization","Mo's Algorithm","Range Queries"],"global_index":"2023-Q-D6-I"},
+        {"letter":"J","name":"Jewels","solvers":273,"attempts":292,"solve_rate":93.5,"difficulty":"Easy","primary_topic":"Bitmask","secondary_topics":["OR","Greedy","Observation","Bits"],"global_index":"2023-Q-D6-J"},
+        {"letter":"K","name":"Karnak","solvers":318,"attempts":340,"solve_rate":93.5,"difficulty":"Easy","primary_topic":"Number Theory","secondary_topics":["Divisors","Math","Observation"],"global_index":"2023-Q-D6-K"},
+        {"letter":"L","name":"Luxor","solvers":350,"attempts":350,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Comparison","Basic"],"global_index":"2023-Q-D6-L"},
+        {"letter":"M","name":"Memphis","solvers":86,"attempts":90,"solve_rate":95.6,"difficulty":"Easy","primary_topic":"Combinatorics","secondary_topics":["Permutations","Math","Counting","Expectation"],"global_index":"2023-Q-D6-M"},
+        {"letter":"N","name":"Nefertiti","solvers":23,"attempts":32,"solve_rate":71.9,"difficulty":"Medium","primary_topic":"Tree","secondary_topics":["Dynamic Programming","Knapsack","Subtree","Counting"],"global_index":"2023-Q-D6-N"}
+      ]
+    },
+    {
+      "day": 7,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/530045",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":278,"attempts":494,"solve_rate":56.3,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["LCM","GCD","Prime Factorization","Observation"],"global_index":"2023-Q-D7-A"},
+        {"letter":"B","name":"Bolbitine","solvers":339,"attempts":400,"solve_rate":84.8,"difficulty":"Easy","primary_topic":"Data Structures","secondary_topics":["Deque","Linked List","String Simulation","Observation"],"global_index":"2023-Q-D7-B"},
+        {"letter":"C","name":"Cleopatra","solvers":288,"attempts":368,"solve_rate":78.3,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Simulation","Math","Observation","Recursion Thinking"],"global_index":"2023-Q-D7-C"},
+        {"letter":"D","name":"Djoser","solvers":389,"attempts":389,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Comparison","Basic"],"global_index":"2023-Q-D7-D"},
+        {"letter":"E","name":"Edfu","solvers":116,"attempts":162,"solve_rate":71.6,"difficulty":"Medium","primary_topic":"Dynamic Programming","secondary_topics":["Knapsack","2D Dynamic Programming","Multiple Choice","Optimization"],"global_index":"2023-Q-D7-E"},
+        {"letter":"F","name":"Fayoum","solvers":163,"attempts":193,"solve_rate":84.5,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["Shortest Path","Binary Search","Diameter","BFS"],"global_index":"2023-Q-D7-F"},
+        {"letter":"G","name":"Giza","solvers":35,"attempts":42,"solve_rate":83.3,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Combinatorics","Stirling Numbers","Permutations","Counting"],"global_index":"2023-Q-D7-G"},
+        {"letter":"H","name":"Heliopolis","solvers":254,"attempts":357,"solve_rate":71.1,"difficulty":"Medium","primary_topic":"Implementation","secondary_topics":["Brute Force","Simulation","Digits","Observation"],"global_index":"2023-Q-D7-H"},
+        {"letter":"I","name":"Imhotep","solvers":219,"attempts":247,"solve_rate":88.7,"difficulty":"Medium","primary_topic":"Number Theory","secondary_topics":["Divisors","Frequency","Sieve Technique","GCD"],"global_index":"2023-Q-D7-I"},
+        {"letter":"J","name":"Jewels","solvers":323,"attempts":377,"solve_rate":85.7,"difficulty":"Easy","primary_topic":"Strings","secondary_topics":["Brute Force","Pattern Matching","Observation","Sorting"],"global_index":"2023-Q-D7-J"},
+        {"letter":"K","name":"Karnak","solvers":59,"attempts":91,"solve_rate":64.8,"difficulty":"Hard","primary_topic":"Number Theory","secondary_topics":["Prime Factorization","Dynamic Programming","Greedy","Set Cover"],"global_index":"2023-Q-D7-K"},
+        {"letter":"L","name":"Luxor","solvers":379,"attempts":382,"solve_rate":99.2,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Strings","Comparison","Greedy","Observation"],"global_index":"2023-Q-D7-L"},
+        {"letter":"M","name":"Memphis","solvers":146,"attempts":206,"solve_rate":70.9,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Intervals","Greedy","Simulation","Ordered Set"],"global_index":"2023-Q-D7-M"},
+        {"letter":"N","name":"Nefertiti","solvers":88,"attempts":117,"solve_rate":75.2,"difficulty":"Hard","primary_topic":"Graph","secondary_topics":["Dijkstra","Binary Search","Shortest Path","Optimization"],"global_index":"2023-Q-D7-N"},
+        {"letter":"O","name":"Oases","solvers":71,"attempts":97,"solve_rate":73.2,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Probability","Graph","Markov Process","Simulation"],"global_index":"2023-Q-D7-O"}
+      ]
+    },
+    {
+      "day": 8,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/530044",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":220,"attempts":238,"solve_rate":92.4,"difficulty":"Easy","primary_topic":"Tree","secondary_topics":["DFS","Subtree Sum","Implementation"],"global_index":"2023-Q-D8-A"},
+        {"letter":"B","name":"Bolbitine","solvers":397,"attempts":399,"solve_rate":99.5,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Observation"],"global_index":"2023-Q-D8-B"},
+        {"letter":"C","name":"Cleopatra","solvers":111,"attempts":217,"solve_rate":51.1,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Modular Arithmetic","Number Theory","Brute Force"],"global_index":"2023-Q-D8-C"},
+        {"letter":"D","name":"Djoser","solvers":35,"attempts":51,"solve_rate":68.6,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["Euler Tour","Segment Tree","Queries","Binary Tree"],"global_index":"2023-Q-D8-D"},
+        {"letter":"E","name":"Edfu","solvers":321,"attempts":337,"solve_rate":95.3,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Counting","Arrays"],"global_index":"2023-Q-D8-E"},
+        {"letter":"F","name":"Fayoum","solvers":157,"attempts":211,"solve_rate":74.4,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Counting","Frequency","Implementation"],"global_index":"2023-Q-D8-F"},
+        {"letter":"G","name":"Giza","solvers":366,"attempts":372,"solve_rate":98.4,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Number Theory","Observation"],"global_index":"2023-Q-D8-G"},
+        {"letter":"H","name":"Heliopolis","solvers":275,"attempts":370,"solve_rate":74.3,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Fenwick Tree","Segment Tree","Frequency","Queries"],"global_index":"2023-Q-D8-H"},
+        {"letter":"I","name":"Imhotep","solvers":111,"attempts":129,"solve_rate":86.0,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["LCA","Difference on Tree","DFS"],"global_index":"2023-Q-D8-I"},
+        {"letter":"J","name":"Jewels","solvers":352,"attempts":368,"solve_rate":95.7,"difficulty":"Easy","primary_topic":"Arrays","secondary_topics":["Mapping","Observation"],"global_index":"2023-Q-D8-J"},
+        {"letter":"K","name":"Karnak","solvers":83,"attempts":115,"solve_rate":72.2,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Prefix Sum","Binary Search","Simulation"],"global_index":"2023-Q-D8-K"},
+        {"letter":"L","name":"Luxor","solvers":116,"attempts":168,"solve_rate":69.0,"difficulty":"Hard","primary_topic":"Strings","secondary_topics":["Two Pointers","Sliding Window","Data Structures"],"global_index":"2023-Q-D8-L"},
+        {"letter":"M","name":"Memphis","solvers":340,"attempts":345,"solve_rate":98.6,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Greedy","Observation"],"global_index":"2023-Q-D8-M"},
+        {"letter":"N","name":"Nefertiti","solvers":83,"attempts":136,"solve_rate":61.0,"difficulty":"Hard","primary_topic":"Math","secondary_topics":["Bit Manipulation","Combinatorics","Binary Representation"],"global_index":"2023-Q-D8-N"}
+      ]
+    },
+    {
+      "day": 9,
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/530043",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":234,"attempts":296,"solve_rate":79.1,"difficulty":"Easy","primary_topic":"Arrays","secondary_topics":["Sorting","Prefix Sum","Math","Greedy"],"global_index":"2023-Q-D9-A"},
+        {"letter":"B","name":"Bolbitine","solvers":288,"attempts":309,"solve_rate":93.2,"difficulty":"Easy","primary_topic":"Data Structures","secondary_topics":["Set","Heap","Greedy","Simulation"],"global_index":"2023-Q-D9-B"},
+        {"letter":"C","name":"Cleopatra","solvers":244,"attempts":309,"solve_rate":79.0,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Modular Arithmetic","Fast Power","Patterns","Number Theory"],"global_index":"2023-Q-D9-C"},
+        {"letter":"D","name":"Djoser","solvers":196,"attempts":235,"solve_rate":83.4,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Two Pointers","Prefix Sum","Simulation","Math"],"global_index":"2023-Q-D9-D"},
+        {"letter":"E","name":"Edfu","solvers":16,"attempts":57,"solve_rate":28.1,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Lazy Propagation","Number Theory","Prime Factorization","Math"],"global_index":"2023-Q-D9-E"},
+        {"letter":"F","name":"Fayoum","solvers":320,"attempts":321,"solve_rate":99.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Comparison"],"global_index":"2023-Q-D9-F"},
+        {"letter":"G","name":"Giza","solvers":150,"attempts":157,"solve_rate":95.5,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Simulation","Modular Arithmetic","Observation"],"global_index":"2023-Q-D9-G"},
+        {"letter":"H","name":"Heliopolis","solvers":81,"attempts":113,"solve_rate":71.7,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Fenwick Tree","Segment Tree","Inversions","Frequency","Queries"],"global_index":"2023-Q-D9-H"},
+        {"letter":"I","name":"Imhotep","solvers":34,"attempts":78,"solve_rate":43.6,"difficulty":"Hard","primary_topic":"Bitmask","secondary_topics":["Prefix","Hashing","Parity","Strings"],"global_index":"2023-Q-D9-I"},
+        {"letter":"J","name":"Jewels","solvers":30,"attempts":63,"solve_rate":47.6,"difficulty":"Hard","primary_topic":"Binary Search","secondary_topics":["Greedy","Prefix Sum","Partitioning","Observation"],"global_index":"2023-Q-D9-J"},
+        {"letter":"K","name":"Karnak","solvers":194,"attempts":261,"solve_rate":74.3,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Number Theory","GCD","Observation"],"global_index":"2023-Q-D9-K"},
+        {"letter":"L","name":"Luxor","solvers":318,"attempts":320,"solve_rate":99.4,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Arrays","Minimum","Observation"],"global_index":"2023-Q-D9-L"},
+        {"letter":"M","name":"Memphis","solvers":8,"attempts":12,"solve_rate":66.7,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["Dynamic Programming","Floyd Warshall","Graph","Shortest Paths","Subtree","Optimization"],"global_index":"2023-Q-D9-M"},
+        {"letter":"N","name":"Nefertiti","solvers":119,"attempts":160,"solve_rate":74.4,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["BFS","Grid","Multi-Source BFS","Simulation"],"global_index":"2023-Q-D9-N"}
+      ]
+    },{
+      "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/484436",
+      "problems": [
+        {"letter":"A","name":"Ancient","solvers":214,"attempts":230,"solve_rate":93.0,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Simulation","Observation","Greedy"],"global_index":"2023-Q-D10-A"},
+        {"letter":"B","name":"Bolbitine","solvers":90,"attempts":121,"solve_rate":74.4,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Combinatorics","Stars and Bars","Modular Arithmetic","Counting"],"global_index":"2023-Q-D10-B"},
+        {"letter":"C","name":"Cleopatra","solvers":186,"attempts":225,"solve_rate":82.7,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Sorting","Observation","Matrix","Two Pointers"],"global_index":"2023-Q-D10-C"},
+        {"letter":"D","name":"Djoser","solvers":26,"attempts":41,"solve_rate":63.4,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Number Theory","Fast Power","Modular Arithmetic","Summation"],"global_index":"2023-Q-D10-D"},
+        {"letter":"E","name":"Edfu","solvers":110,"attempts":172,"solve_rate":64.0,"difficulty":"Medium","primary_topic":"Data Structures","secondary_topics":["Prefix Max","Suffix Max","Two Pointers","Binary Search","Observation"],"global_index":"2023-Q-D10-E"},
+        {"letter":"F","name":"Fayoum","solvers":298,"attempts":302,"solve_rate":98.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Summation","Math","Arrays"],"global_index":"2023-Q-D10-F"},
+        {"letter":"G","name":"Giza","solvers":288,"attempts":289,"solve_rate":99.7,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Ceil","Binary Search","Observation"],"global_index":"2023-Q-D10-G"},
+        {"letter":"H","name":"Heliopolis","solvers":88,"attempts":96,"solve_rate":91.7,"difficulty":"Medium","primary_topic":"Math","secondary_topics":["Number Theory","Digit DP","Combinatorics","Inclusion-Exclusion","GCD"],"global_index":"2023-Q-D10-H"},
+        {"letter":"I","name":"Imhotep","solvers":247,"attempts":261,"solve_rate":94.6,"difficulty":"Easy","primary_topic":"Prefix Sum","secondary_topics":["Greedy","Two Pointers","Observation","Arrays"],"global_index":"2023-Q-D10-I"},
+        {"letter":"J","name":"Jewels","solvers":145,"attempts":178,"solve_rate":81.5,"difficulty":"Medium","primary_topic":"Constructive","secondary_topics":["Math","Observation","Symmetry","Greedy"],"global_index":"2023-Q-D10-J"},
+        {"letter":"K","name":"Karnak","solvers":31,"attempts":35,"solve_rate":88.6,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Number Theory","Divisibility","Combinatorics","Optimization","Graphs Thinking"],"global_index":"2023-Q-D10-K"},
+        {"letter":"L","name":"Luxor","solvers":298,"attempts":298,"solve_rate":100.0,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math","Conditions","Observation"],"global_index":"2023-Q-D10-L"},
+        {"letter":"M","name":"Memphis","solvers":20,"attempts":25,"solve_rate":80.0,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["DFS","Euler Tour","Offline Queries","Number Theory","Sieve","Prefix on Tree","Heavy-Light or DSU on Tree"],"global_index":"2023-Q-D10-M"},
+        {"letter":"N","name":"Nefertiti","solvers":265,"attempts":278,"solve_rate":95.3,"difficulty":"Easy","primary_topic":"Strings","secondary_topics":["Sliding Window","Brute Force","Observation","Greedy"],"global_index":"2023-Q-D10-N"}
+      ]
+    }
+  ]
+}

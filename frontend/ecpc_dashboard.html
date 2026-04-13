@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ECPC Road — Analytics</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #080c14;
+    --bg1: #0d1420;
+    --bg2: #111b2e;
+    --bg3: #172035;
+    --border: #1e2d47;
+    --border2: #243550;
+    --accent: #00d4ff;
+    --accent2: #0097b8;
+    --accent-dim: rgba(0,212,255,0.12);
+    --accent-dim2: rgba(0,212,255,0.06);
+    --gold: #ffd166;
+    --green: #06d6a0;
+    --red: #ef476f;
+    --orange: #ff9f43;
+    --purple: #a855f7;
+    --text: #e2eaf7;
+    --text2: #8ba0c0;
+    --text3: #4d6080;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 10px;
+    --shadow: 0 4px 32px rgba(0,0,0,0.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 14px; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg1); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+
+  .layout { display: flex; height: 100vh; overflow: hidden; }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 240px; min-width: 240px;
+    background: var(--bg1);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    transition: width .2s;
+  }
+  .sidebar-logo {
+    padding: 20px 16px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 12px; font-weight: 700; color: #000;
+    flex-shrink: 0;
+  }
+  .logo-text { font-size: 13px; font-weight: 700; letter-spacing: .03em; line-height: 1.2; }
+  .logo-sub { font-size: 10px; color: var(--text3); font-family: var(--mono); }
+
+  .nav-section { padding: 12px 0; }
+  .nav-label { padding: 4px 16px 6px; font-size: 9px; font-weight: 700; letter-spacing: .12em; color: var(--text3); text-transform: uppercase; font-family: var(--mono); }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px; cursor: pointer;
+    color: var(--text2); font-size: 13px; font-weight: 500;
+    border-left: 2px solid transparent;
+    transition: all .15s; position: relative;
+    white-space: nowrap; overflow: hidden;
+  }
+  .nav-item:hover { color: var(--text); background: var(--accent-dim2); }
+  .nav-item.active { color: var(--accent); background: var(--accent-dim); border-left-color: var(--accent); }
+  .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+  .sidebar-filters { padding: 12px 16px; border-top: 1px solid var(--border); flex: 1; }
+  .filter-label { font-size: 9px; font-weight: 700; letter-spacing: .12em; color: var(--text3); text-transform: uppercase; font-family: var(--mono); margin-bottom: 8px; }
+  .filter-group { margin-bottom: 14px; }
+  .filter-select {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border2);
+    color: var(--text); border-radius: 6px; padding: 7px 10px; font-size: 12px;
+    font-family: var(--sans); cursor: pointer; outline: none;
+    transition: border-color .15s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234d6080'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+  }
+  .filter-select:hover, .filter-select:focus { border-color: var(--accent2); }
+  .filter-select option { background: var(--bg2); }
+
+  /* MAIN */
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .topbar {
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg1); flex-shrink: 0;
+  }
+  .page-title { font-size: 18px; font-weight: 700; }
+  .page-sub { font-size: 12px; color: var(--text3); margin-top: 2px; font-family: var(--mono); }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+
+  .btn {
+    padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--text2); font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all .15s; font-family: var(--sans);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { border-color: var(--accent2); color: var(--accent); background: var(--accent-dim); }
+  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); color: #000; }
+
+  .content { flex: 1; overflow-y: auto; padding: 24px; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg1); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .card-title { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--text3); text-transform: uppercase; font-family: var(--mono); margin-bottom: 16px; }
+  .card-value { font-size: 32px; font-weight: 700; font-family: var(--mono); color: var(--text); line-height: 1; }
+  .card-value.accent { color: var(--accent); }
+  .card-value.gold { color: var(--gold); }
+  .card-value.green { color: var(--green); }
+  .card-sub { font-size: 11px; color: var(--text3); margin-top: 6px; }
+
+  /* GRID */
+  .grid { display: grid; gap: 16px; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2-1 { grid-template-columns: 2fr 1fr; }
+  .grid-1-2 { grid-template-columns: 1fr 2fr; }
+
+  /* STAT CARD */
+  .stat-card {
+    background: var(--bg1); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    position: relative; overflow: hidden;
+    transition: border-color .2s;
+  }
+  .stat-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .stat-card.c0::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .stat-card.c1::before { background: linear-gradient(90deg, var(--gold), transparent); }
+  .stat-card.c2::before { background: linear-gradient(90deg, var(--green), transparent); }
+  .stat-card.c3::before { background: linear-gradient(90deg, var(--purple), transparent); }
+  .stat-card:hover { border-color: var(--border2); }
+  .stat-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; color: var(--text3); text-transform: uppercase; font-family: var(--mono); }
+  .stat-num { font-size: 28px; font-weight: 700; font-family: var(--mono); margin: 6px 0 4px; }
+  .stat-num.c0 { color: var(--accent); }
+  .stat-num.c1 { color: var(--gold); }
+  .stat-num.c2 { color: var(--green); }
+  .stat-num.c3 { color: var(--purple); }
+  .stat-detail { font-size: 11px; color: var(--text3); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left; padding: 10px 12px;
+    font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    color: var(--text3); text-transform: uppercase; font-family: var(--mono);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    color: var(--text2); font-size: 12.5px; vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg2); color: var(--text); }
+  tr { transition: background .1s; cursor: default; }
+  .clickable tr { cursor: pointer; }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; font-weight: 700; font-family: var(--mono);
+    letter-spacing: .04em; white-space: nowrap;
+  }
+  .badge-easy { background: rgba(6,214,160,.15); color: var(--green); border: 1px solid rgba(6,214,160,.3); }
+  .badge-medium { background: rgba(255,159,67,.15); color: var(--orange); border: 1px solid rgba(255,159,67,.3); }
+  .badge-medium-hard { background: rgba(255,100,40,.15); color: #ff6428; border: 1px solid rgba(255,100,40,.3); }
+  .badge-hard { background: rgba(239,71,111,.15); color: var(--red); border: 1px solid rgba(239,71,111,.3); }
+  .badge-very-hard { background: rgba(168,85,247,.15); color: var(--purple); border: 1px solid rgba(168,85,247,.3); }
+  .badge-unknown { background: rgba(77,96,128,.15); color: var(--text3); border: 1px solid var(--border); }
+
+  .topic-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; background: var(--accent-dim); color: var(--accent);
+    border: 1px solid rgba(0,212,255,.2); white-space: nowrap;
+  }
+  .solve-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .solve-bar { height: 4px; border-radius: 2px; background: var(--border); flex: 1; overflow: hidden; }
+  .solve-bar-fill { height: 100%; border-radius: 2px; background: var(--green); transition: width .3s; }
+  .solve-pct { font-size: 11px; font-family: var(--mono); color: var(--text2); width: 38px; text-align: right; flex-shrink: 0; }
+
+  /* SEARCH */
+  .search-wrap { position: relative; }
+  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; pointer-events: none; }
+  .search-input {
+    width: 100%; background: var(--bg2); border: 1px solid var(--border2);
+    color: var(--text); border-radius: 6px; padding: 9px 12px 9px 32px;
+    font-size: 13px; font-family: var(--sans); outline: none;
+    transition: border-color .15s;
+  }
+  .search-input:focus { border-color: var(--accent2); }
+  .search-input::placeholder { color: var(--text3); }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab {
+    padding: 9px 18px; font-size: 13px; font-weight: 500; cursor: pointer;
+    color: var(--text3); border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: all .15s; white-space: nowrap;
+  }
+  .tab:hover { color: var(--text2); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* LOADING / EMPTY */
+  .loading { display: flex; align-items: center; justify-content: center; padding: 40px; color: var(--text3); font-family: var(--mono); font-size: 12px; gap: 8px; }
+  .spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .empty { display: flex; align-items: center; justify-content: center; padding: 40px; color: var(--text3); font-size: 13px; flex-direction: column; gap: 8px; }
+  .empty-icon { font-size: 28px; opacity: .4; }
+
+  /* PAGINATION */
+  .pagination { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); margin-top: 4px; }
+  .pag-info { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+  .pag-btns { display: flex; gap: 4px; }
+  .pag-btn {
+    padding: 5px 10px; border-radius: 5px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--text2); font-size: 11px;
+    cursor: pointer; transition: all .12s; font-family: var(--mono);
+  }
+  .pag-btn:hover:not(:disabled) { border-color: var(--accent2); color: var(--accent); }
+  .pag-btn:disabled { opacity: .35; cursor: not-allowed; }
+  .pag-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+  /* CHART TOOLTIP */
+  .custom-tooltip {
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: 6px; padding: 10px 14px; font-family: var(--mono);
+    font-size: 11px; box-shadow: var(--shadow);
+  }
+  .custom-tooltip .label { color: var(--text3); font-size: 10px; margin-bottom: 4px; }
+  .custom-tooltip .value { color: var(--accent); font-weight: 700; }
+
+  /* SECTION HEADER */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .section-title { font-size: 13px; font-weight: 700; color: var(--text); }
+  .section-sub { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 2px; }
+
+  /* TAG CLOUD */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+  .topic-tag {
+    padding: 4px 10px; border-radius: 5px; font-size: 11px; cursor: pointer;
+    background: var(--bg2); border: 1px solid var(--border2); color: var(--text2);
+    transition: all .15s; font-family: var(--mono); white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .topic-tag:hover, .topic-tag.active { background: var(--accent-dim); border-color: var(--accent2); color: var(--accent); }
+  .topic-count { font-size: 10px; color: var(--text3); }
+  .topic-tag.active .topic-count { color: var(--accent2); }
+
+  /* LINK */
+  .problem-link { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .problem-link:hover { text-decoration: underline; }
+
+  /* BREADCRUMB */
+  .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text3); font-family: var(--mono); margin-bottom: 4px; }
+  .breadcrumb-sep { opacity: .4; }
+  .breadcrumb-link { cursor: pointer; }
+  .breadcrumb-link:hover { color: var(--accent); }
+  .breadcrumb-current { color: var(--text2); }
+
+  /* SCROLLBAR in content */
+  .content::-webkit-scrollbar { width: 5px; }
+
+  /* RESPONSIVE tweaks */
+  @media (max-width: 1100px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2-1, .grid-1-2 { grid-template-columns: 1fr; }
+  }
+
+  /* ANIMATION */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .fade-in { animation: fadeIn .25s ease both; }
+
+  /* CONTEST CARD */
+  .contest-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 18px;
+    cursor: pointer; transition: all .15s; position: relative; overflow: hidden;
+  }
+  .contest-card:hover { border-color: var(--accent2); background: var(--bg3); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,212,255,.07); }
+  .contest-card-year { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+  .contest-card-title { font-size: 13px; font-weight: 600; color: var(--text); margin: 4px 0 8px; }
+  .contest-card-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .contest-meta-item { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+  .contest-meta-item strong { color: var(--text2); }
+  .qual-badge { position: absolute; top: 12px; right: 12px; background: rgba(255,209,102,.1); color: var(--gold); border: 1px solid rgba(255,209,102,.3); padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; font-family: var(--mono); }
+
+  /* Day pills */
+  .day-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border2);
+    background: var(--bg2); color: var(--text2); font-size: 12px;
+    cursor: pointer; transition: all .15s; font-family: var(--mono);
+  }
+  .day-pill:hover { border-color: var(--accent2); color: var(--accent); background: var(--accent-dim); }
+  .day-pill.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useCallback, useMemo, useRef } = React;
+const API = 'http://localhost:5000';
+
+// ── Colors ─────────────────────────────────────────────────────────────────
+const DIFF_COLORS = {
+  'Easy': '#06d6a0',
+  'Medium': '#ff9f43',
+  'Medium-Hard': '#ff6428',
+  'Hard': '#ef476f',
+  'Very Hard': '#a855f7',
+  'Unknown': '#4d6080',
+};
+const CHART_COLORS = ['#00d4ff','#ffd166','#06d6a0','#a855f7','#ef476f','#ff9f43','#38bdf8','#fb923c','#4ade80','#c084fc','#f472b6','#67e8f9'];
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+const diffBadge = d => {
+  const map = { 'Easy':'easy','Medium':'medium','Medium-Hard':'medium-hard','Hard':'hard','Very Hard':'very-hard' };
+  return <span className={`badge badge-${map[d]||'unknown'}`}>{d||'Unknown'}</span>;
+};
+
+const SolveBar = ({ rate }) => (
+  <div className="solve-bar-wrap">
+    <div className="solve-bar">
+      <div className="solve-bar-fill" style={{
+        width: `${Math.min(rate||0,100)}%`,
+        background: rate > 70 ? '#06d6a0' : rate > 40 ? '#ff9f43' : '#ef476f'
+      }} />
+    </div>
+    <span className="solve-pct">{(rate||0).toFixed(1)}%</span>
+  </div>
+);
+
+const Loading = () => (
+  <div className="loading"><div className="spinner" /><span>Loading...</span></div>
+);
+
+const Empty = ({ msg = 'No data found' }) => (
+  <div className="empty"><div className="empty-icon">📭</div>{msg}</div>
+);
+
+// ── API Hook ─────────────────────────────────────────────────────────────────
+function useApi(url, deps=[]) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!url) return;
+    setLoading(true); setError(null);
+    fetch(API + url)
+      .then(r => r.json())
+      .then(d => { setData(d); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  }, [url, ...deps]);
+
+  return { data, loading, error };
+}
+
+// ── Stat Card ─────────────────────────────────────────────────────────────────
+const StatCard = ({ label, value, detail, color = 0 }) => (
+  <div className={`stat-card c${color}`}>
+    <div className="stat-label">{label}</div>
+    <div className={`stat-num c${color}`}>{value}</div>
+    {detail && <div className="stat-detail">{detail}</div>}
+  </div>
+);
+
+// ── Chart.js global defaults ─────────────────────────────────────────────────
+Chart.defaults.color = '#8ba0c0';
+Chart.defaults.font.family = "'Space Mono', monospace";
+Chart.defaults.font.size = 11;
+
+// ── Difficulty Pie (Chart.js) ─────────────────────────────────────────────────
+const DiffPie = ({ counts }) => {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+  const data = Object.entries(counts||{}).filter(([,v])=>v>0).map(([name,value]) => ({name,value}));
+
+  useEffect(() => {
+    if (!canvasRef.current || !data.length) return;
+    if (chartRef.current) { chartRef.current.destroy(); }
+    chartRef.current = new Chart(canvasRef.current, {
+      type: 'doughnut',
+      data: {
+        labels: data.map(d=>d.name),
+        datasets: [{
+          data: data.map(d=>d.value),
+          backgroundColor: data.map(d=>DIFF_COLORS[d.name]||'#4d6080'),
+          borderColor: '#0d1420',
+          borderWidth: 3,
+          hoverBorderWidth: 3,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '62%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: '#8ba0c0', font: { size: 11, family: "'Space Mono',monospace" }, padding: 14, boxWidth: 10, boxHeight: 10 }
+          },
+          tooltip: {
+            backgroundColor: '#111b2e', borderColor: '#243550', borderWidth: 1,
+            titleColor: '#8ba0c0', bodyColor: '#00d4ff', padding: 10,
+            callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}` }
+          }
+        }
+      }
+    });
+    return () => { if (chartRef.current) { chartRef.current.destroy(); chartRef.current = null; } };
+  }, [JSON.stringify(counts)]);
+
+  if (!data.length) return <Empty msg="No difficulty data" />;
+  return <div style={{position:'relative',height:240}}><canvas ref={canvasRef} /></div>;
+};
+
+// ── Topics Bar (Chart.js) ────────────────────────────────────────────────────
+const TopicsBar = ({ topics, onSelect }) => {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+  const items = (topics||[]).slice(0,15).map(([name,count]) => ({
+    label: name.length > 18 ? name.slice(0,16)+'…' : name,
+    count, full: name
+  }));
+
+  useEffect(() => {
+    if (!canvasRef.current || !items.length) return;
+    if (chartRef.current) { chartRef.current.destroy(); }
+    chartRef.current = new Chart(canvasRef.current, {
+      type: 'bar',
+      data: {
+        labels: items.map(d=>d.label),
+        datasets: [{
+          label: 'Problems',
+          data: items.map(d=>d.count),
+          backgroundColor: items.map((_,i) => CHART_COLORS[i % CHART_COLORS.length] + 'cc'),
+          borderColor:     items.map((_,i) => CHART_COLORS[i % CHART_COLORS.length]),
+          borderWidth: 1, borderRadius: 4, borderSkipped: false,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        onClick: (e, els) => {
+          if (onSelect && els.length) onSelect(items[els[0].index].full);
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#111b2e', borderColor: '#243550', borderWidth: 1,
+            titleColor: '#8ba0c0', bodyColor: '#00d4ff', padding: 10,
+            callbacks: { title: ctx => items[ctx[0].dataIndex].full }
+          }
+        },
+        scales: {
+          x: { grid: { color: '#1e2d47' }, ticks: { color: '#4d6080' }, border: { color: '#1e2d47' } },
+          y: { grid: { display: false }, ticks: { color: '#8ba0c0', font: { size: 11 } }, border: { color: '#1e2d47' } }
+        }
+      }
+    });
+    return () => { if (chartRef.current) { chartRef.current.destroy(); chartRef.current = null; } };
+  }, [JSON.stringify(topics)]);
+
+  if (!items.length) return <Empty msg="No topic data" />;
+  return <div style={{position:'relative',height:Math.max(items.length*26+40, 220)}}><canvas ref={canvasRef} /></div>;
+};
+
+// ── Problem Table ─────────────────────────────────────────────────────────────
+const PAGE_SIZE = 20;
+const ProblemTable = ({ problems, loading }) => {
+  const [page, setPage] = useState(1);
+  useEffect(() => setPage(1), [problems?.length]);
+
+  if (loading) return <Loading />;
+  if (!problems?.length) return <Empty msg="No problems match your filters" />;
+
+  const total = problems.length;
+  const pages = Math.ceil(total / PAGE_SIZE);
+  const slice = problems.slice((page-1)*PAGE_SIZE, page*PAGE_SIZE);
+
+  return (
+    <>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Problem</th><th>Contest</th><th>Day</th>
+              <th>Difficulty</th><th>Topic</th><th>Solve Rate</th><th>Solvers</th>
+            </tr>
+          </thead>
+          <tbody>
+            {slice.map((p,i) => (
+              <tr key={p.global_index||i} onClick={() => p.problem_url && window.open(p.problem_url,'_blank')}>
+                <td style={{fontFamily:'var(--mono)',color:'var(--text3)',width:40}}>{(page-1)*PAGE_SIZE+i+1}</td>
+                <td>
+                  <a className="problem-link" href={p.problem_url||'#'} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()}>
+                    <span style={{fontFamily:'var(--mono)',color:'var(--text3)',marginRight:6}}>{p.letter}.</span>
+                    {p.name}
+                  </a>
+                </td>
+                <td style={{color:'var(--text3)',fontSize:11,fontFamily:'var(--mono)'}}>{p.contest_id}</td>
+                <td style={{fontFamily:'var(--mono)',textAlign:'center'}}>{p.day}</td>
+                <td>{diffBadge(p.difficulty)}</td>
+                <td><span className="topic-badge">{p.primary_topic}</span></td>
+                <td style={{minWidth:130}}><SolveBar rate={p.solve_rate} /></td>
+                <td style={{fontFamily:'var(--mono)',color:'var(--text2)'}}>{p.solvers}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {pages > 1 && (
+        <div className="pagination">
+          <span className="pag-info">{total} problems · page {page}/{pages}</span>
+          <div className="pag-btns">
+            <button className="pag-btn" disabled={page===1} onClick={()=>setPage(p=>p-1)}>‹ Prev</button>
+            {Array.from({length:Math.min(pages,7)},(_,i)=>{
+              let pg = i+1;
+              if(pages>7){
+                if(page<=4) pg=i+1;
+                else if(page>=pages-3) pg=pages-6+i;
+                else pg=page-3+i;
+              }
+              return <button key={pg} className={`pag-btn${pg===page?' active':''}`} onClick={()=>setPage(pg)}>{pg}</button>;
+            })}
+            <button className="pag-btn" disabled={page===pages} onClick={()=>setPage(p=>p+1)}>Next ›</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+// ── Overview Page ─────────────────────────────────────────────────────────────
+const OverviewPage = ({ globalFilters }) => {
+  const { data: ov, loading } = useApi('/api/overview');
+  const { data: allTopics } = useApi('/api/topics');
+  const { data: problems, loading: pLoading } = useApi(
+    `/api/problems?${globalFilters.topic?`topic=${encodeURIComponent(globalFilters.topic)}&`:''}${globalFilters.difficulty?`difficulty=${encodeURIComponent(globalFilters.difficulty)}&`:''}&page_size=500`
+  );
+  const [selectedTopic, setSelectedTopic] = useState(null);
+
+  if (loading) return <Loading />;
+  if (!ov) return <Empty msg="Could not load overview. Is the Flask server running?" />;
+
+  const topTopics = (allTopics||[]).slice(0,20);
+
+  return (
+    <div className="fade-in" style={{display:'flex',flexDirection:'column',gap:20}}>
+      <div className="grid grid-4">
+        <StatCard label="Total Contests" value={ov.total_contests} detail="ECPC seasons" color={0} />
+        <StatCard label="Total Problems" value={ov.total_problems} detail={`${ov.days_covered} contest days`} color={1} />
+        <StatCard label="Avg Solve Rate" value={`${(ov.avg_solve_rate||0).toFixed(1)}%`} detail="across all contests" color={2} />
+        <StatCard label="Topics Covered" value={(ov.topic_counts||[]).length} detail="unique algorithm topics" color={3} />
+      </div>
+
+      <div className="grid grid-2">
+        <div className="card">
+          <div className="card-title">Difficulty Distribution</div>
+          <DiffPie counts={ov.difficulty_counts} />
+        </div>
+        <div className="card">
+          <div className="card-title">Top Topics by Problem Count</div>
+          <TopicsBar topics={ov.topic_counts} onSelect={setSelectedTopic} />
+        </div>
+      </div>
+
+      {topTopics.length > 0 && (
+        <div className="card">
+          <div className="card-title">All Topics — Click to explore</div>
+          <div className="tag-cloud">
+            {topTopics.map(t => (
+              <div key={t.topic} className={`topic-tag${selectedTopic===t.topic?' active':''}`}
+                   onClick={() => setSelectedTopic(s => s===t.topic ? null : t.topic)}>
+                {t.topic}
+                <span className="topic-count">{t.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="card">
+        <div className="section-header">
+          <div>
+            <div className="section-title">
+              {selectedTopic ? `Problems — ${selectedTopic}` : 'All Problems'}
+            </div>
+            <div className="section-sub">{problems?.count||0} results</div>
+          </div>
+          {selectedTopic && (
+            <button className="btn" onClick={()=>setSelectedTopic(null)}>✕ Clear topic</button>
+          )}
+        </div>
+        <ProblemTable problems={selectedTopic
+          ? (problems?.items||[]).filter(p=>p.primary_topic===selectedTopic||p.secondary_topics?.includes(selectedTopic))
+          : (problems?.items||[])} loading={pLoading} />
+      </div>
+    </div>
+  );
+};
+
+// ── Contests Page ────────────────────────────────────────────────────────────
+const ContestsPage = ({ onNavigate }) => {
+  const { data: contests, loading } = useApi('/api/contests');
+  const [filter, setFilter] = useState('all');
+
+  if (loading) return <Loading />;
+  if (!contests?.length) return <Empty msg="No contests found" />;
+
+  const filtered = filter === 'qual'
+    ? contests.filter(c=>c.is_qualification)
+    : filter === 'final'
+    ? contests.filter(c=>!c.is_qualification)
+    : contests;
+
+  return (
+    <div className="fade-in" style={{display:'flex',flexDirection:'column',gap:20}}>
+      <div className="tabs">
+        {[['all','All Contests'],['final','Finals'],['qual','Qualifications']].map(([v,l])=>(
+          <div key={v} className={`tab${filter===v?' active':''}`} onClick={()=>setFilter(v)}>{l}</div>
+        ))}
+      </div>
+      <div className="grid grid-3">
+        {filtered.map(c => (
+          <div key={c.contest_id} className="contest-card" onClick={()=>onNavigate('contest',c)}>
+            {c.is_qualification && <div className="qual-badge">QUAL</div>}
+            <div className="contest-card-year">{c.year||'—'}</div>
+            <div className="contest-card-title">{c.title}</div>
+            <div className="contest-card-meta">
+              <div className="contest-meta-item"><strong>{c.total_problems}</strong> problems</div>
+              <div className="contest-meta-item"><strong>{c.total_days}</strong> days</div>
+              <div className="contest-meta-item">avg <strong>{(c.avg_solve_rate||0).toFixed(1)}%</strong></div>
+            </div>
+            {c.summary?.difficulty_counts && (
+              <div style={{marginTop:10,display:'flex',gap:4,flexWrap:'wrap'}}>
+                {Object.entries(c.summary.difficulty_counts).map(([d,n])=>(
+                  <span key={d} className={`badge badge-${d.toLowerCase().replace(' ','-').replace('medium-hard','medium-hard').replace('very-hard','very-hard').replace('medium','medium').replace('easy','easy').replace('hard','hard')}`}>{n} {d}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ── Contest Detail Page ────────────────────────────────────────────────────────
+const ContestDetailPage = ({ contest, onNavigate, onBack }) => {
+  const { data, loading } = useApi(`/api/stats/contest/${contest.contest_id}`);
+  const [activeDay, setActiveDay] = useState(null);
+
+  const dayData = useMemo(() => {
+    if (!data?.days) return [];
+    return data.days;
+  }, [data]);
+
+  const currentDay = useMemo(() => {
+    if (activeDay === null) return null;
+    return dayData.find(d=>d.day===activeDay);
+  }, [dayData, activeDay]);
+
+  if (loading) return <Loading />;
+  if (!data) return <Empty msg="Contest data not found" />;
+
+  const s = data.summary || {};
+
+  return (
+    <div className="fade-in" style={{display:'flex',flexDirection:'column',gap:20}}>
+      <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+        <button className="btn" onClick={onBack}>← Contests</button>
+        <div>
+          <div style={{fontSize:20,fontWeight:700}}>{data.title}</div>
+          <div style={{fontSize:11,color:'var(--text3)',fontFamily:'var(--mono)'}}>{data.year} · {data.is_qualification?'Qualification':'Final'}</div>
+        </div>
+        {data.contest_link && (
+          <a href={data.contest_link} target="_blank" rel="noreferrer" className="btn" style={{marginLeft:'auto'}}>
+            Open on CF ↗
+          </a>
+        )}
+      </div>
+
+      <div className="grid grid-4">
+        <StatCard label="Total Problems" value={s.total_problems||0} color={0} />
+        <StatCard label="Days" value={s.days_covered||dayData.length} color={1} />
+        <StatCard label="Avg Solve Rate" value={`${(s.avg_solve_rate||0).toFixed(1)}%`} color={2} />
+        <StatCard label="Topics" value={(s.topic_counts||[]).length} color={3} />
+      </div>
+
+      <div className="grid grid-2">
+        <div className="card">
+          <div className="card-title">Difficulty Distribution</div>
+          <DiffPie counts={s.difficulty_counts} />
+        </div>
+        <div className="card">
+          <div className="card-title">Top Topics</div>
+          <TopicsBar topics={s.topic_counts} />
+        </div>
+      </div>
+
+      {dayData.length > 0 && (
+        <div className="card">
+          <div className="card-title">Days</div>
+          <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:16}}>
+            <div className={`day-pill${activeDay===null?' active':''}`} onClick={()=>setActiveDay(null)}>All Days</div>
+            {dayData.map(d=>(
+              <div key={d.day} className={`day-pill${activeDay===d.day?' active':''}`} onClick={()=>setActiveDay(d.day)}>
+                Day {d.day}
+                <span style={{fontSize:10,opacity:.7}}>{d.total_problems}p</span>
+              </div>
+            ))}
+          </div>
+
+          {currentDay ? (
+            <div style={{display:'flex',flexDirection:'column',gap:16}}>
+              <div className="grid grid-3">
+                <StatCard label="Problems" value={currentDay.total_problems} color={0} />
+                <StatCard label="Avg Solve Rate" value={`${currentDay.avg_solve_rate||0}%`} color={2} />
+                <StatCard label="Topics" value={(currentDay.topic_counts||[]).length} color={3} />
+              </div>
+              <div className="grid grid-2">
+                <div>
+                  <div className="card-title" style={{marginBottom:10}}>Hardest Problems</div>
+                  <table style={{width:'100%'}}>
+                    <tbody>
+                      {(currentDay.hardest||[]).map((p,i)=>(
+                        <tr key={i} onClick={()=>p.problem_url&&window.open(p.problem_url,'_blank')} style={{cursor:'pointer'}}>
+                          <td style={{fontFamily:'var(--mono)',color:'var(--text3)',width:24}}>{p.letter}</td>
+                          <td><span style={{color:'var(--text)',fontSize:12}}>{p.name}</span></td>
+                          <td>{diffBadge(p.difficulty)}</td>
+                          <td><SolveBar rate={p.solve_rate} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <div className="card-title" style={{marginBottom:10}}>Easiest Problems</div>
+                  <table style={{width:'100%'}}>
+                    <tbody>
+                      {(currentDay.easiest||[]).map((p,i)=>(
+                        <tr key={i} onClick={()=>p.problem_url&&window.open(p.problem_url,'_blank')} style={{cursor:'pointer'}}>
+                          <td style={{fontFamily:'var(--mono)',color:'var(--text3)',width:24}}>{p.letter}</td>
+                          <td><span style={{color:'var(--text)',fontSize:12}}>{p.name}</span></td>
+                          <td>{diffBadge(p.difficulty)}</td>
+                          <td><SolveBar rate={p.solve_rate} /></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div style={{display:'flex',flexDirection:'column',gap:12}}>
+              {dayData.map(d=>(
+                <div key={d.day} style={{borderBottom:'1px solid var(--border)',paddingBottom:12,display:'flex',alignItems:'center',gap:16,flexWrap:'wrap'}}>
+                  <div style={{fontFamily:'var(--mono)',fontSize:13,fontWeight:700,color:'var(--text)',width:48}}>Day {d.day}</div>
+                  <div style={{fontSize:12,color:'var(--text3)'}}>{d.total_problems} problems</div>
+                  <div style={{flex:1,display:'flex',gap:6,flexWrap:'wrap'}}>
+                    {Object.entries(d.difficulty_counts||{}).map(([diff,n])=>(
+                      <span key={diff} className={`badge badge-${diff.toLowerCase().replace(' ','-')}`}>{n} {diff}</span>
+                    ))}
+                  </div>
+                  <div style={{display:'flex',alignItems:'center',gap:6,color:'var(--text3)',fontSize:11}}>
+                    avg <span style={{color:'var(--text2)',fontFamily:'var(--mono)'}}>{d.avg_solve_rate}%</span>
+                  </div>
+                  <button className="btn" style={{fontSize:11,padding:'4px 10px'}} onClick={()=>setActiveDay(d.day)}>View →</button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="card">
+        <div className="card-title">All Problems</div>
+        <ProblemTable problems={dayData.flatMap(d=>(activeDay===null||d.day===activeDay)?d.problems||[]:[]).flat()} loading={loading} />
+      </div>
+    </div>
+  );
+};
+
+// ── Explorer Page ─────────────────────────────────────────────────────────────
+const ExplorerPage = ({ globalFilters, setGlobalFilters }) => {
+  const [q, setQ] = useState('');
+  const [topic, setTopic] = useState(globalFilters.topic||'');
+  const [difficulty, setDifficulty] = useState(globalFilters.difficulty||'');
+  const [contestId, setContestId] = useState(globalFilters.contest||'');
+  const [sort, setSort] = useState('solve_rate');
+  const [order, setOrder] = useState('desc');
+
+  const { data: contests } = useApi('/api/contests');
+  const { data: topicsData } = useApi('/api/topics');
+
+  const queryStr = useMemo(() => {
+    const p = new URLSearchParams();
+    if (q) p.set('q', q);
+    if (topic) p.set('topic', topic);
+    if (difficulty) p.set('difficulty', difficulty);
+    if (contestId) p.set('contest_id', contestId);
+    p.set('sort', sort);
+    p.set('order', order);
+    p.set('page_size', '500');
+    return p.toString();
+  }, [q, topic, difficulty, contestId, sort, order]);
+
+  const { data: problems, loading } = useApi(`/api/problems?${queryStr}`, [queryStr]);
+
+  const topTopics = useMemo(() => (topicsData||[]).slice(0,30).map(t=>t.topic), [topicsData]);
+
+  return (
+    <div className="fade-in" style={{display:'flex',flexDirection:'column',gap:16}}>
+      <div className="card">
+        <div className="grid" style={{gridTemplateColumns:'1fr 180px 180px 180px 140px 100px',gap:10}}>
+          <div className="search-wrap">
+            <span className="search-icon">🔍</span>
+            <input className="search-input" placeholder="Search problems by name, topic..." value={q} onChange={e=>setQ(e.target.value)} />
+          </div>
+          <select className="filter-select" value={contestId} onChange={e=>setContestId(e.target.value)}>
+            <option value="">All Contests</option>
+            {(contests||[]).map(c=><option key={c.contest_id} value={c.contest_id}>{c.title}</option>)}
+          </select>
+          <select className="filter-select" value={topic} onChange={e=>setTopic(e.target.value)}>
+            <option value="">All Topics</option>
+            {topTopics.map(t=><option key={t} value={t}>{t}</option>)}
+          </select>
+          <select className="filter-select" value={difficulty} onChange={e=>setDifficulty(e.target.value)}>
+            <option value="">All Difficulties</option>
+            {['Easy','Medium','Medium-Hard','Hard','Very Hard'].map(d=><option key={d} value={d}>{d}</option>)}
+          </select>
+          <select className="filter-select" value={sort} onChange={e=>setSort(e.target.value)}>
+            <option value="solve_rate">Solve Rate</option>
+            <option value="solvers">Solvers</option>
+            <option value="difficulty">Difficulty</option>
+            <option value="name">Name</option>
+            <option value="day">Day</option>
+          </select>
+          <select className="filter-select" value={order} onChange={e=>setOrder(e.target.value)}>
+            <option value="desc">↓ Desc</option>
+            <option value="asc">↑ Asc</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="section-header" style={{marginBottom:12}}>
+          <div>
+            <div className="section-title">Problems</div>
+            <div className="section-sub">{problems?.count||0} results</div>
+          </div>
+          {(q||topic||difficulty||contestId) && (
+            <button className="btn" onClick={()=>{setQ('');setTopic('');setDifficulty('');setContestId('');}}>
+              ✕ Clear filters
+            </button>
+          )}
+        </div>
+        <ProblemTable problems={problems?.items||[]} loading={loading} />
+      </div>
+    </div>
+  );
+};
+
+// ── Topics Page ─────────────────────────────────────────────────────────────
+const TopicsPage = () => {
+  const { data: topicsData, loading } = useApi('/api/topics');
+  const [selected, setSelected] = useState(null);
+  const { data: problems, loading: pLoading } = useApi(
+    selected ? `/api/problems?topic=${encodeURIComponent(selected)}&page_size=500` : null,
+    [selected]
+  );
+
+  if (loading) return <Loading />;
+
+  const total = (topicsData||[]).reduce((s,t)=>s+t.count,0);
+
+  return (
+    <div className="fade-in" style={{display:'flex',flexDirection:'column',gap:16}}>
+      <div className="card">
+        <div className="card-title">Topics Overview</div>
+        <TopicsBar topics={(topicsData||[]).slice(0,20).map(t=>[t.topic,t.count])} onSelect={setSelected} />
+      </div>
+
+      <div className="card">
+        <div className="card-title">All Topics — click to filter problems</div>
+        <div className="tag-cloud">
+          {(topicsData||[]).map(t=>(
+            <div key={t.topic} className={`topic-tag${selected===t.topic?' active':''}`}
+                 onClick={()=>setSelected(s=>s===t.topic?null:t.topic)}>
+              {t.topic}
+              <span className="topic-count">{t.count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {selected && (
+        <div className="card">
+          <div className="section-header">
+            <div>
+              <div className="section-title">Problems: {selected}</div>
+              <div className="section-sub">{problems?.count||0} problems</div>
+            </div>
+            <button className="btn" onClick={()=>setSelected(null)}>✕ Clear</button>
+          </div>
+          <ProblemTable problems={problems?.items||[]} loading={pLoading} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ── Main App ────────────────────────────────────────────────────────────────
+const PAGES = [
+  { id:'overview', label:'Overview', icon:'📊' },
+  { id:'contests', label:'Contests', icon:'🏆' },
+  { id:'topics', label:'Topics', icon:'🧠' },
+  { id:'explorer', label:'Explorer', icon:'🔍' },
+];
+
+export default function App() {
+  const [page, setPage] = useState('overview');
+  const [contestDetail, setContestDetail] = useState(null);
+  const [filters, setFilters] = useState({ topic:'', difficulty:'', contest:'' });
+
+  const { data: contests } = useApi('/api/contests');
+  const { data: topicsData } = useApi('/api/topics');
+  const { data: difficulties } = useApi('/api/difficulties');
+
+  const handleNavigate = (type, data) => {
+    if (type === 'contest') {
+      setContestDetail(data);
+      setPage('contest-detail');
+    }
+  };
+
+  const goContests = () => { setPage('contests'); setContestDetail(null); };
+
+  const pageTitle = useMemo(() => {
+    if (page === 'contest-detail' && contestDetail) return contestDetail.title;
+    return PAGES.find(p=>p.id===page)?.label || 'Overview';
+  }, [page, contestDetail]);
+
+  return (
+    <div className="layout">
+      {/* Sidebar */}
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <div className="logo-icon">CP</div>
+          <div>
+            <div className="logo-text">ECPC Road</div>
+            <div className="logo-sub">Analytics</div>
+          </div>
+        </div>
+
+        <div className="nav-section">
+          <div className="nav-label">Navigation</div>
+          {PAGES.map(p => (
+            <div key={p.id}
+                 className={`nav-item${page===p.id||((page==='contest-detail')&&p.id==='contests')?' active':''}`}
+                 onClick={()=>{ setPage(p.id); if(p.id!=='contests') setContestDetail(null); }}>
+              <span className="nav-icon">{p.icon}</span>
+              {p.label}
+            </div>
+          ))}
+        </div>
+
+        <div className="sidebar-filters">
+          <div className="filter-label">Quick Filters</div>
+
+          <div className="filter-group">
+            <div style={{fontSize:10,color:'var(--text3)',marginBottom:4,fontFamily:'var(--mono)'}}>CONTEST</div>
+            <select className="filter-select" value={filters.contest} onChange={e=>setFilters(f=>({...f,contest:e.target.value}))}>
+              <option value="">All Contests</option>
+              {(contests||[]).map(c=><option key={c.contest_id} value={c.contest_id}>{c.title}</option>)}
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <div style={{fontSize:10,color:'var(--text3)',marginBottom:4,fontFamily:'var(--mono)'}}>TOPIC</div>
+            <select className="filter-select" value={filters.topic} onChange={e=>setFilters(f=>({...f,topic:e.target.value}))}>
+              <option value="">All Topics</option>
+              {(topicsData||[]).slice(0,30).map(t=><option key={t.topic} value={t.topic}>{t.topic}</option>)}
+            </select>
+          </div>
+
+          <div className="filter-group">
+            <div style={{fontSize:10,color:'var(--text3)',marginBottom:4,fontFamily:'var(--mono)'}}>DIFFICULTY</div>
+            <select className="filter-select" value={filters.difficulty} onChange={e=>setFilters(f=>({...f,difficulty:e.target.value}))}>
+              <option value="">All Difficulties</option>
+              {['Easy','Medium','Medium-Hard','Hard','Very Hard'].map(d=><option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
+
+          {(filters.topic || filters.difficulty || filters.contest) && (
+            <button className="btn" style={{width:'100%',justifyContent:'center',fontSize:11}} onClick={()=>setFilters({topic:'',difficulty:'',contest:''})}>
+              ✕ Clear Filters
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Main */}
+      <div className="main">
+        <div className="topbar">
+          <div>
+            {page === 'contest-detail' && contestDetail && (
+              <div className="breadcrumb">
+                <span className="breadcrumb-link" onClick={goContests}>Contests</span>
+                <span className="breadcrumb-sep">›</span>
+                <span className="breadcrumb-current">{contestDetail.title}</span>
+              </div>
+            )}
+            <div className="page-title">{pageTitle}</div>
+            {page === 'overview' && <div className="page-sub">ECPC historical problem analytics</div>}
+          </div>
+          <div className="topbar-actions">
+            <button className="btn" onClick={()=>fetch(API+'/api/refresh',{method:'POST'}).then(()=>window.location.reload())}>
+              ↺ Refresh
+            </button>
+            <a href={API+'/api/overview'} target="_blank" rel="noreferrer" className="btn">API ↗</a>
+          </div>
+        </div>
+
+        <div className="content">
+          {page === 'overview' && <OverviewPage globalFilters={filters} />}
+          {page === 'contests' && <ContestsPage onNavigate={handleNavigate} />}
+          {page === 'contest-detail' && contestDetail && (
+            <ContestDetailPage contest={contestDetail} onNavigate={handleNavigate} onBack={goContests} />
+          )}
+          {page === 'topics' && <TopicsPage />}
+          {page === 'explorer' && <ExplorerPage globalFilters={filters} setGlobalFilters={setFilters} />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

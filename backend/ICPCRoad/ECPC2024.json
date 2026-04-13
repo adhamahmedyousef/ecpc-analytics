@@ -1,0 +1,22 @@
+{
+    "year": 2024,
+    "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/538817",
+    "stage": "final",
+    "problems": [
+      {"letter":"A","name":"Antiquities of Acre","solvers":69,"attempts":87,"solve_rate":79.3,"difficulty":"Hard","primary_topic":"Interactive","secondary_topics":["Binary Search","Adversarial","Implementation"]},
+      {"letter":"B","name":"Biblical Journeys in Bethlehem","solvers":372,"attempts":414,"solve_rate":89.9,"difficulty":"Easy","primary_topic":"Greedy","secondary_topics":["Simulation","Prefix Sum","Implementation"]},
+      {"letter":"C","name":"Canals of Beersheba","solvers":322,"attempts":340,"solve_rate":94.7,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Algebra","Equations","Floating Point"]},
+      {"letter":"D","name":"Diverse Culture of Al-Khalil","solvers":30,"attempts":51,"solve_rate":58.8,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Greedy","Intervals","Binary Lifting"]},
+      {"letter":"E","name":"Exploration of Jericho’s Oases","solvers":66,"attempts":97,"solve_rate":68.0,"difficulty":"Very Hard","primary_topic":"Geometry","secondary_topics":["Vectors","Angles","Dot Product","Cross Product","Floating Point"]},
+      {"letter":"F","name":"Fishing Traditions of Tiberias","solvers":31,"attempts":53,"solve_rate":58.5,"difficulty":"Very Hard","primary_topic":"Number Theory","secondary_topics":["LCM","Mobius","Divisors","Sieve","Math"]},
+      {"letter":"G","name":"Gateways of Beisan","solvers":27,"attempts":32,"solve_rate":84.4,"difficulty":"Very Hard","primary_topic":"Probability","secondary_topics":["Expected Value","Combinatorics","Strings","Hashing"]},
+      {"letter":"H","name":"Harbor Life in Jaffa","solvers":86,"attempts":101,"solve_rate":85.1,"difficulty":"Very Hard","primary_topic":"Data Structures","secondary_topics":["Segment Tree","Linear Basis","Bitmask","Range Queries","Lazy Propagation"]},
+      {"letter":"I","name":"Interwoven Cultures of Nablus","solvers":264,"attempts":314,"solve_rate":84.1,"difficulty":"Medium","primary_topic":"Strings","secondary_topics":["Palindrome","Bitmask","Two Pointers","Sliding Window"]},
+      {"letter":"J","name":"Journey in Safed’s Mysteries","solvers":116,"attempts":167,"solve_rate":69.5,"difficulty":"Hard","primary_topic":"Dynamic Programming","secondary_topics":["Kadane","Greedy","Prefix Sum","Max Subarray"]},
+      {"letter":"K","name":"Kaleidoscope of Ramla’s Diversity","solvers":389,"attempts":394,"solve_rate":98.7,"difficulty":"Easy","primary_topic":"Implementation","secondary_topics":["Math"]},
+      {"letter":"L","name":"Logistics of Lod’s Connectivity","solvers":166,"attempts":213,"solve_rate":77.9,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Sorting","Constructive Algorithms","Permutations"]},
+      {"letter":"M","name":"Majestic Crossroads Al-Nasserah","solvers":123,"attempts":134,"solve_rate":91.8,"difficulty":"Medium","primary_topic":"Greedy","secondary_topics":["Prefix Sum","Two Pointers","Math"]},
+      {"letter":"N","name":"Navigation Challenges in Gaza","solvers":170,"attempts":287,"solve_rate":59.2,"difficulty":"Hard","primary_topic":"Data Structures","secondary_topics":["Prefix Sum","Binary Search","Two Pointers","Monotonic Stack"]},
+      {"letter":"O","name":"Urban Exploration in Al-Quds","solvers":186,"attempts":223,"solve_rate":83.4,"difficulty":"Very Hard","primary_topic":"Tree","secondary_topics":["Trie","Bitmask","DFS","Binary Lifting","Greedy"]}
+    ]
+  }

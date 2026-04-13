@@ -1,0 +1,348 @@
+/* =============================================
+   ECPC Analytics — style.css
+   Dark terminal aesthetic, JetBrains Mono base
+   ============================================= */
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #0d0d14;
+  --surface2: #12121c;
+  --border: #1e1e2e;
+  --accent: #e84545;
+  --accent2: #ff6b6b;
+  --text: #e0e0e0;
+  --muted: #6b6b7e;
+  --easy: #22c55e;
+  --medium: #f59e0b;
+  --hard: #ef4444;
+  --very-hard: #a855f7;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: #2a2a3d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Sidebar ── */
+.sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a3d var(--surface);
+}
+
+/* ── Nav Items ── */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+.nav-item:hover { background: #1a1a28; color: var(--text); }
+.nav-item.active { background: rgba(232,69,69,0.12); color: var(--accent); border-left: 2px solid var(--accent); padding-left: 8px; }
+
+.sidebar-contest-link {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-contest-link:hover { background: #1a1a28; color: var(--text); }
+.sidebar-contest-link.active-contest { color: var(--accent); }
+
+/* ── Cards ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: #2e2e45; }
+
+.card-header {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #c0c0d0;
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Stat Cards ── */
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--accent);
+  border-radius: 10px 0 0 10px;
+}
+.stat-card:hover { border-color: #2e2e45; transform: translateY(-1px); }
+
+.stat-label {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.stat-value {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #fff;
+  line-height: 1;
+}
+.stat-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── Charts ── */
+.chart-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chart-wrap canvas {
+  max-width: 100%;
+}
+
+/* ── Tables ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.data-table th {
+  text-align: left;
+  padding: 9px 12px;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.data-table th:hover { color: var(--text); }
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(30,30,46,0.6);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background 0.1s; }
+
+/* ── Badges ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  background: #1e1e2e;
+  color: var(--muted);
+  font-weight: 500;
+}
+.badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.badge-red  { background: rgba(232,69,69,0.15);  color: var(--accent); }
+
+.diff-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.diff-easy      { background: rgba(34,197,94,0.15);   color: var(--easy); }
+.diff-medium    { background: rgba(245,158,11,0.15);  color: var(--medium); }
+.diff-hard      { background: rgba(239,68,68,0.15);   color: var(--hard); }
+.diff-very-hard { background: rgba(168,85,247,0.15);  color: var(--very-hard); }
+.diff-unknown   { background: #1e1e2e;                color: var(--muted); }
+
+.letter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  background: rgba(232,69,69,0.1);
+  border: 1px solid rgba(232,69,69,0.25);
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Problem Row ── */
+.problem-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.problem-row:hover {
+  background: #1a1a28;
+  border-color: var(--border);
+}
+
+/* ── Solve Rate Bar ── */
+.rate-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rate-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: #1e1e2e;
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 50px;
+}
+.rate-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.rate-text {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── Filters ── */
+.filter-label {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.filter-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.filter-input:focus { border-color: var(--accent); }
+.filter-input option { background: #12121c; }
+
+/* ── Tab Buttons ── */
+.tab-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tab-btn:hover { border-color: #2e2e45; color: var(--text); }
+.tab-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(232,69,69,0.08); }
+
+/* ── Link Button ── */
+.link-btn {
+  color: var(--accent);
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.link-btn:hover { color: var(--accent2); }
+
+/* ── Pagination ── */
+.pagination-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pagination-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.pagination-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* ── Pulse dot ── */
+.pulse-dot {
+  animation: pulse-anim 2s infinite;
+}
+@keyframes pulse-anim {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Animate in ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card, .stat-card {
+  animation: fadeUp 0.3s ease forwards;
+}
+
+/* ── Scrollbar thin ── */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a3d transparent;
+}

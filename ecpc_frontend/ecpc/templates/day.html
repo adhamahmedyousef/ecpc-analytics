@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}Day {{ day }} · {{ contest_id }} · ECPC Analytics{% endblock %}
+{% block page_title %}<span id="day-title">Day {{ day }}</span>{% endblock %}
+{% block page_subtitle %}Per-day problem breakdown{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+  <a href="/contest/{{ contest_id }}" class="text-xs text-gray-500 hover:text-[#e84545] transition-colors">← Back to Contest</a>
+</div>
+
+<div id="day-body">
+  <!-- Stats -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+    <div class="stat-card">
+      <div class="stat-label">Problems</div>
+      <div class="stat-value" id="d-total">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Avg Solve Rate</div>
+      <div class="stat-value" id="d-rate">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Easy</div>
+      <div class="stat-value text-green-400" id="d-easy">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Hard+</div>
+      <div class="stat-value text-red-400" id="d-hard">—</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-6">
+    <div class="card col-span-2">
+      <div class="card-header">Difficulty Distribution</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="diffChart"></canvas></div>
+    </div>
+    <div class="card col-span-3">
+      <div class="card-header">Topics</div>
+      <div class="chart-wrap" style="height:240px"><canvas id="topicChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Hardest / Easiest -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+    <div class="card">
+      <div class="card-header text-red-400">🔥 Hardest Problems</div>
+      <div id="hardest-list" class="space-y-2 mt-2"></div>
+    </div>
+    <div class="card">
+      <div class="card-header text-green-400">✅ Easiest Problems</div>
+      <div id="easiest-list" class="space-y-2 mt-2"></div>
+    </div>
+  </div>
+
+  <!-- All Problems -->
+  <div class="card">
+    <div class="card-header">All Problems — Day {{ day }}</div>
+    <div class="overflow-x-auto">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Letter</th><th>Name</th><th>Difficulty</th><th>Topic</th>
+            <th>Solve Rate</th><th>Solvers</th><th>Attempts</th><th></th>
+          </tr>
+        </thead>
+        <tbody id="day-problems-tbody">
+          <tr><td colspan="8" class="text-center text-gray-600 py-6">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const CONTEST_ID = {{ contest_id | tojson }};
+const DAY = {{ day }};
+
+(async function() {
+  const data = await apiFetch(`/api/contests/${encodeURIComponent(CONTEST_ID)}/days/${DAY}`);
+  if (!data) {
+    document.getElementById('day-body').innerHTML = '<div class="text-red-400">Day not found</div>';
+    return;
+  }
+
+  document.getElementById('day-title').textContent = `${CONTEST_ID} — Day ${DAY}`;
+  document.getElementById('d-total').textContent = data.total_problems ?? '—';
+  document.getElementById('d-rate').textContent = data.avg_solve_rate !== undefined ? (data.avg_solve_rate*100).toFixed(1)+'%' : '—';
+
+  const dc = data.difficulty_counts || {};
+  document.getElementById('d-easy').textContent = dc['Easy'] ?? 0;
+  document.getElementById('d-hard').textContent = (dc['Hard'] || 0) + (dc['Very Hard'] || 0);
+
+  if (dc) renderPie('diffChart', Object.keys(dc), Object.values(dc));
+  if (data.topic_counts) renderBar('topicChart', data.topic_counts.map(t => t[0]), data.topic_counts.map(t => t[1]));
+
+  renderProblemList('hardest-list', data.hardest || []);
+  renderProblemList('easiest-list', data.easiest || []);
+
+  // Problems table via /api/problems
+  const probs = await apiFetch(`/api/problems?contest_id=${encodeURIComponent(CONTEST_ID)}&day=${DAY}`);
+  const items = probs?.items || [];
+  const tbody = document.getElementById('day-problems-tbody');
+  if (!items.length) {
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-gray-600 py-6">No problems found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(p => `
+    <tr class="cursor-pointer hover:bg-[#1a1a28] transition-colors" onclick="window.open('${p.problem_url||'#'}','_blank')">
+      <td><span class="letter-badge">${escHtml(p.letter||'?')}</span></td>
+      <td class="text-gray-200">${escHtml(p.name||'Untitled')}</td>
+      <td><span class="diff-badge diff-${(p.difficulty||'unknown').toLowerCase().replace(' ','-')}">${p.difficulty}</span></td>
+      <td class="text-gray-400 text-xs">${escHtml(p.primary_topic||'—')}</td>
+      <td>${renderRate(p.solve_rate)}</td>
+      <td class="text-gray-400">${p.solvers??'—'}</td>
+      <td class="text-gray-500">${p.attempts??'—'}</td>
+      <td><span class="link-btn text-xs">Open ↗</span></td>
+    </tr>
+  `).join('');
+})();
+
+function renderProblemList(elId, problems) {
+  const el = document.getElementById(elId);
+  if (!problems.length) { el.innerHTML = '<div class="text-gray-600 text-xs py-2">No data</div>'; return; }
+  el.innerHTML = problems.map(p => `
+    <a href="${p.problem_url||'#'}" target="_blank" class="problem-row group">
+      <div class="flex items-center gap-2">
+        <span class="letter-badge">${p.letter||'?'}</span>
+        <span class="text-sm text-gray-200 group-hover:text-white">${escHtml(p.name||'Untitled')}</span>
+      </div>
+      <div class="flex items-center gap-2 ml-auto">
+        <span class="diff-badge diff-${(p.difficulty||'unknown').toLowerCase().replace(' ','-')}">${p.difficulty}</span>
+        <span class="text-xs text-gray-500">${p.solve_rate!==undefined?(p.solve_rate*100).toFixed(1)+'%':''}</span>
+      </div>
+    </a>
+  `).join('');
+}
+</script>
+{% endblock %}
