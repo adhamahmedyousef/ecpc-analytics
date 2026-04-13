@@ -72,6 +72,16 @@ Open in browser:
 
 http://localhost:5000
 
+## Access to Problems
+
+To open the problems directly on Codeforces, you need to join the ACPC Scientific Committee Archive.
+
+You can join from here:
+https://codeforces.com/group/Rilx5irOux/blog
+
+This archive is one of the main and most reliable sources for Egyptian contests, and access is required to view the problems.
+
+
 ## Project Structure
 
 app/  
