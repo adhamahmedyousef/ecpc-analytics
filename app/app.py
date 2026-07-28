@@ -8,6 +8,12 @@ from flask import render_template
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()                      # load .env if python-dotenv installed
+except ImportError:                    # graceful fallback
+    pass
+
 
 # ---------------------------------------------------------------------------
 # Logging configuration
@@ -21,12 +27,22 @@ logging.basicConfig(
 )
 logger = logging.getLogger("ecpc-analytics")
 
+# ---------------------------------------------------------------------------
+# App & environment configuration
+# ---------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "ICPCRoad"
 
-
 app = Flask(__name__)
-CORS(app)
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-insecure-key")
+
+_flask_debug = os.environ.get("FLASK_DEBUG", "0").strip()
+app.config["DEBUG"] = _flask_debug in ("1", "true", "True")
+
+# CORS — restrict to configured origins (defaults to same-origin / *).
+_cors_origins = os.environ.get("CORS_ORIGINS", "*")
+cors_origins = [o.strip() for o in _cors_origins.split(",") if o.strip()]
+CORS(app, origins=cors_origins)
 
 
 class ContestStore:
@@ -485,5 +501,7 @@ def refresh():
 
 
 if __name__ == "__main__":
-    logger.info("Starting ECPC Analytics dev server (data_dir=%s)", DATA_DIR)
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    _host = os.environ.get("HOST", "0.0.0.0")
+    _port = int(os.environ.get("PORT", 5000))
+    logger.info("Starting ECPC Analytics dev server (host=%s, port=%d, data_dir=%s)", _host, _port, DATA_DIR)
+    app.run(debug=app.config["DEBUG"], host=_host, port=_port)
