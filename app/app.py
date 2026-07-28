@@ -44,6 +44,49 @@ _cors_origins = os.environ.get("CORS_ORIGINS", "*")
 cors_origins = [o.strip() for o in _cors_origins.split(",") if o.strip()]
 CORS(app, origins=cors_origins)
 
+# ---------------------------------------------------------------------------
+# Rate limiting
+# ---------------------------------------------------------------------------
+try:
+    from flask_limiter import Limiter
+    from flask_limiter.util import get_remote_address
+
+    _rate_limit = os.environ.get("RATE_LIMIT", "60/minute")
+    limiter = Limiter(
+        get_remote_address,
+        app=app,
+        default_limits=[_rate_limit],
+        storage_uri="memory://",
+    )
+    logger.info("Rate limiting enabled: %s", _rate_limit)
+except ImportError:
+    limiter = None
+    logger.warning("flask-limiter not installed — rate limiting disabled")
+
+# ---------------------------------------------------------------------------
+# Admin API key (used to gate /api/refresh)
+# ---------------------------------------------------------------------------
+ADMIN_API_KEY = os.environ.get("ADMIN_API_KEY", "")
+
+# ---------------------------------------------------------------------------
+# Security headers
+# ---------------------------------------------------------------------------
+@app.after_request
+def set_security_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com; "
+        "img-src 'self' data:; "
+        "connect-src 'self'"
+    )
+    return response
+
 
 class ContestStore:
     def __init__(self, data_dir: Path):
@@ -420,17 +463,17 @@ def day_page(contest_id, day):
     return render_template("day.html", contest_id=contest_id, day=day)
 @app.get("/api/problems")
 def get_problems():
-    contest_id = request.args.get("contest_id")
-    topic = request.args.get("topic")
-    difficulty = request.args.get("difficulty")
-    q = request.args.get("q")
+    contest_id = request.args.get("contest_id", "")[:100]
+    topic = request.args.get("topic", "")[:100]
+    difficulty = request.args.get("difficulty", "")[:50]
+    q = request.args.get("q", "")[:200]
     day = request.args.get("day", type=int)
 
     items = store.search_problems(
-        contest_id=contest_id,
-        topic=topic,
-        difficulty=difficulty,
-        q=q,
+        contest_id=contest_id or None,
+        topic=topic or None,
+        difficulty=difficulty or None,
+        q=q or None,
         day=day,
     )
 
@@ -496,7 +539,12 @@ def topics():
 
 @app.get("/api/refresh")
 def refresh():
+    key = request.headers.get("X-Admin-Key", "")
+    if not ADMIN_API_KEY or key != ADMIN_API_KEY:
+        logger.warning("Unauthorized /api/refresh attempt from %s", request.remote_addr)
+        return jsonify({"error": "Forbidden"}), 403
     store.load()
+    logger.info("Manual data refresh triggered by admin")
     return jsonify({"ok": True, "message": "reloaded"})
 
 
