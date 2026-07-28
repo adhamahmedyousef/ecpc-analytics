@@ -6,6 +6,18 @@
 const API = '';  
 
 
+/**
+ * Returns a debounced version of `fn` that delays invocation
+ * until `delay` ms have elapsed since the last call.
+ */
+function debounce(fn, delay = 300) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 async function apiFetch(path) {
   try {
     const res = await fetch(API + path);

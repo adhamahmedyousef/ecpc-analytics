@@ -110,9 +110,13 @@ let sortDir = 1;
     applyFilters();
   }
 
-  ['filter-q','filter-diff','filter-topic','filter-contest'].forEach(id => {
+  // Debounce text search input to avoid re-filtering on every keystroke
+  const debouncedFilter = debounce(() => { currentPage = 1; applyFilters(); }, 300);
+  document.getElementById('filter-q').addEventListener('input', debouncedFilter);
+
+  // Dropdowns fire immediately on change (no debounce needed)
+  ['filter-diff','filter-topic','filter-contest'].forEach(id => {
     const el = document.getElementById(id);
-    el.addEventListener('input', () => { currentPage = 1; applyFilters(); });
     el.addEventListener('change', () => { currentPage = 1; applyFilters(); });
   });
 })();
