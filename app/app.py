@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -7,6 +8,18 @@ from flask import render_template
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+
+# ---------------------------------------------------------------------------
+# Logging configuration
+# ---------------------------------------------------------------------------
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+
+logging.basicConfig(
+    level=getattr(logging, LOG_LEVEL, logging.INFO),
+    format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+logger = logging.getLogger("ecpc-analytics")
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "ICPCRoad"
@@ -49,6 +62,7 @@ class ContestStore:
 
     def maybe_reload(self) -> None:
         if self._needs_reload():
+            logger.info("Data change detected, reloading contest data…")
             self.load()
 
     def load(self) -> None:
@@ -58,6 +72,7 @@ class ContestStore:
         self.mtimes.clear()
 
         if not self.data_dir.exists():
+            logger.warning("Data directory does not exist: %s", self.data_dir)
             return
 
         for path in sorted(self.data_dir.glob("*.json")):
@@ -67,9 +82,13 @@ class ContestStore:
                 self.mtimes[path.name] = path.stat().st_mtime
                 self._ingest_file(path.name, data)
             except Exception as e:
-                print(f"[WARN] Failed to load {path.name}: {e}")
+                logger.exception("Failed to load %s: %s", path.name, e)
 
         self._finalize_contests()
+        logger.info(
+            "Loaded %d contest files → %d contests, %d problems",
+            len(self.raw_files), len(self.contests), len(self.problems),
+        )
 
     def _contest_id_from_file(self, filename: str, data: Dict[str, Any]) -> str:
         stem = Path(filename).stem
@@ -466,4 +485,5 @@ def refresh():
 
 
 if __name__ == "__main__":
+    logger.info("Starting ECPC Analytics dev server (data_dir=%s)", DATA_DIR)
     app.run(debug=True, host="0.0.0.0", port=5000)
