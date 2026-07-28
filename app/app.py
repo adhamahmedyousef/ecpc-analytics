@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from collections import Counter, defaultdict
@@ -90,11 +91,13 @@ def set_security_headers(response):
 
 class ContestStore:
     def __init__(self, data_dir: Path):
+        self._reload_lock = threading.Lock()
         self.data_dir = data_dir
         self.raw_files: Dict[str, Any] = {}
         self.problems: List[Dict[str, Any]] = []
         self.contests: Dict[str, Dict[str, Any]] = {}
         self.mtimes: Dict[str, float] = {}
+        self.global_summary: Dict[str, Any] = {}
         self.load()
 
     def _read_json_file(self, path: Path) -> Any:
@@ -121,33 +124,66 @@ class ContestStore:
 
     def maybe_reload(self) -> None:
         if self._needs_reload():
-            logger.info("Data change detected, reloading contest data…")
-            self.load()
+            with self._reload_lock:
+                if self._needs_reload():          # double-check after acquiring lock
+                    logger.info("Data change detected, reloading contest data…")
+                    self._load_internal()
 
     def load(self) -> None:
-        self.raw_files.clear()
-        self.problems.clear()
-        self.contests.clear()
-        self.mtimes.clear()
+        """Public entry point for data reload (thread-safe)."""
+        with self._reload_lock:
+            self._load_internal()
+
+    def _load_internal(self) -> None:
+        """Build new data structures and swap them in atomically.
+
+        Must be called while holding ``_reload_lock``.
+        """
+        raw_files: Dict[str, Any] = {}
+        problems: List[Dict[str, Any]] = []
+        contests: Dict[str, Dict[str, Any]] = {}
+        mtimes: Dict[str, float] = {}
 
         if not self.data_dir.exists():
             logger.warning("Data directory does not exist: %s", self.data_dir)
+            self._swap(raw_files, problems, contests, mtimes, {})
             return
 
         for path in sorted(self.data_dir.glob("*.json")):
             try:
                 data = self._read_json_file(path)
-                self.raw_files[path.name] = data
-                self.mtimes[path.name] = path.stat().st_mtime
-                self._ingest_file(path.name, data)
+                raw_files[path.name] = data
+                mtimes[path.name] = path.stat().st_mtime
+                self._ingest_file(path.name, data, contests, problems)
             except Exception as e:
                 logger.exception("Failed to load %s: %s", path.name, e)
 
-        self._finalize_contests()
+        global_summary = self._finalize_contests(contests, problems)
+        self._swap(raw_files, problems, contests, mtimes, global_summary)
         logger.info(
             "Loaded %d contest files → %d contests, %d problems",
             len(self.raw_files), len(self.contests), len(self.problems),
         )
+
+    def _swap(
+        self,
+        raw_files: Dict[str, Any],
+        problems: List[Dict[str, Any]],
+        contests: Dict[str, Dict[str, Any]],
+        mtimes: Dict[str, float],
+        global_summary: Dict[str, Any],
+    ) -> None:
+        """Replace all data references in one go.
+
+        In CPython each attribute assignment is atomic (GIL), so concurrent
+        readers will see either the old or the new reference — never a
+        partially-constructed data structure.
+        """
+        self.raw_files = raw_files
+        self.problems = problems
+        self.contests = contests
+        self.mtimes = mtimes
+        self.global_summary = global_summary
 
     def _contest_id_from_file(self, filename: str, data: Dict[str, Any]) -> str:
         stem = Path(filename).stem
@@ -196,7 +232,9 @@ class ContestStore:
         }
         return normalized
 
-    def _ingest_file(self, filename: str, data: Dict[str, Any]) -> None:
+    def _ingest_file(self, filename: str, data: Dict[str, Any],
+                     contests: Dict[str, Dict[str, Any]],
+                     problems: List[Dict[str, Any]]) -> None:
         contest_id = self._contest_id_from_file(filename, data)
 
         if "days" in data:
@@ -208,7 +246,7 @@ class ContestStore:
                     year = int("".join([c for c in title if c.isdigit()][:4])) if any(c.isdigit() for c in title) else None
                     break
 
-            contest = self.contests.setdefault(contest_id, {
+            contest = contests.setdefault(contest_id, {
                 "contest_id": contest_id,
                 "title": title,
                 "contest_link": contest_link,
@@ -233,7 +271,7 @@ class ContestStore:
                         problem=problem,
                     )
                     contest["days"][day_num].append(normalized)
-                    self.problems.append(normalized)
+                    problems.append(normalized)
             return
 
         if "problems" in data:
@@ -242,7 +280,7 @@ class ContestStore:
             title = f"ECPC{year}" if year is not None else contest_id
             contest_link = data.get("contest_link", "")
 
-            contest = self.contests.setdefault(contest_id, {
+            contest = contests.setdefault(contest_id, {
                 "contest_id": contest_id,
                 "title": title,
                 "contest_link": contest_link,
@@ -263,11 +301,12 @@ class ContestStore:
                     problem=problem,
                 )
                 contest["days"][day_num].append(normalized)
-                self.problems.append(normalized)
+                problems.append(normalized)
 
-    def _finalize_contests(self) -> None:
+    def _finalize_contests(self, contests: Dict[str, Dict[str, Any]],
+                           all_problems: List[Dict[str, Any]]) -> Dict[str, Any]:
 
-        for contest in self.contests.values():
+        for contest in contests.values():
             days_dict = contest.get("days", {})
             sorted_days = sorted(days_dict.items(), key=lambda x: x[0])
 
@@ -281,7 +320,7 @@ class ContestStore:
             contest["days"] = day_summaries
             contest["summary"] = self._build_contest_summary(contest, contest_problems)
 
-        self.global_summary = self._build_global_summary()
+        return self._build_global_summary(contests, all_problems)
 
     def _build_day_summary(self, contest: Dict[str, Any], day_num: int, problems: List[Dict[str, Any]]) -> Dict[str, Any]:
         if not problems:
@@ -349,8 +388,9 @@ class ContestStore:
             "easiest": easiest,
         }
 
-    def _build_global_summary(self) -> Dict[str, Any]:
-        if not self.problems:
+    def _build_global_summary(self, contests: Dict[str, Dict[str, Any]],
+                              problems: List[Dict[str, Any]]) -> Dict[str, Any]:
+        if not problems:
             return {
                 "total_contests": 0,
                 "total_problems": 0,
@@ -359,18 +399,18 @@ class ContestStore:
                 "avg_solve_rate": 0.0,
             }
 
-        difficulty_counts = Counter(p["difficulty"] for p in self.problems)
+        difficulty_counts = Counter(p["difficulty"] for p in problems)
         topic_counts = Counter()
 
-        for p in self.problems:
+        for p in problems:
             topic_counts[p["primary_topic"]] += 1
             for s in p.get("secondary_topics", []):
                 topic_counts[s] += 1
-        avg_solve_rate = round(sum(p["solve_rate"] for p in self.problems) / len(self.problems), 2)
+        avg_solve_rate = round(sum(p["solve_rate"] for p in problems) / len(problems), 2)
 
         return {
-            "total_contests": len(self.contests),
-            "total_problems": len(self.problems),
+            "total_contests": len(contests),
+            "total_problems": len(problems),
             "difficulty_counts": dict(difficulty_counts),
             "topic_counts": topic_counts.most_common(25),
             "avg_solve_rate": avg_solve_rate,
