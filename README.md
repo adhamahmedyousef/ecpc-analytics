@@ -104,7 +104,8 @@ gunicorn -w 4 -b 0.0.0.0:5000 app.app:app
 | `PORT` | `5000` | Server port |
 | `LOG_LEVEL` | `INFO` | Logging level (DEBUG, INFO, WARNING, ERROR) |
 | `ADMIN_API_KEY` | *(empty)* | Required to call `/api/refresh` |
-| `RATE_LIMIT` | `60/minute` | Global rate limit per IP |
+| `RATE_LIMIT` | `60/minute` | Rate limit per IP, per endpoint |
+| `TRUSTED_PROXIES` | `0` | Proxy hops in front of the app — set when behind a reverse proxy so rate limits key on the real client IP |
 
 ## Access to Problems
 

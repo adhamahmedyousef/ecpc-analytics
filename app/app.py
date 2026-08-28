@@ -46,6 +46,32 @@ cors_origins = [o.strip() for o in _cors_origins.split(",") if o.strip()]
 CORS(app, origins=cors_origins)
 
 # ---------------------------------------------------------------------------
+# Reverse proxy support
+#
+# Behind a proxy every request appears to come from the proxy itself, which
+# collapses all clients into a single rate-limit bucket. Set TRUSTED_PROXIES to
+# the number of proxy hops in front of the app to read the real client IP from
+# X-Forwarded-For. Leave it at 0 when the app is directly exposed, or clients
+# can forge that header and pick their own bucket.
+# ---------------------------------------------------------------------------
+try:
+    TRUSTED_PROXIES = int(os.environ.get("TRUSTED_PROXIES", "0"))
+except ValueError:
+    TRUSTED_PROXIES = 0
+
+if TRUSTED_PROXIES > 0:
+    from werkzeug.middleware.proxy_fix import ProxyFix
+
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app,
+        x_for=TRUSTED_PROXIES,
+        x_proto=TRUSTED_PROXIES,
+        x_host=TRUSTED_PROXIES,
+        x_prefix=TRUSTED_PROXIES,
+    )
+    logger.info("Trusting %d proxy hop(s) for client IP", TRUSTED_PROXIES)
+
+# ---------------------------------------------------------------------------
 # Rate limiting
 # ---------------------------------------------------------------------------
 try:
