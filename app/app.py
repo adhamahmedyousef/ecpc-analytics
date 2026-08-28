@@ -89,6 +89,47 @@ def set_security_headers(response):
     return response
 
 
+# ---------------------------------------------------------------------------
+# Value coercion
+#
+# Contest JSON is hand-maintained, so a single null or mistyped field used to
+# reach the aggregation step and take the whole app down with it. Coerce at
+# ingest so the summary math below is always total.
+# ---------------------------------------------------------------------------
+def _as_number(value: Any, default: Any = 0) -> Any:
+    if value is None or isinstance(value, bool):
+        return default
+    if isinstance(value, (int, float)):
+        return value
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _as_optional_int(value: Any) -> Optional[int]:
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _as_text(value: Any, default: str = "") -> str:
+    if isinstance(value, str):
+        return value
+    if value is None:
+        return default
+    return str(value)
+
+
+def _as_text_list(value: Any) -> List[str]:
+    if not isinstance(value, list):
+        return []
+    return [_as_text(v) for v in value if v is not None]
+
+
 class ContestStore:
     def __init__(self, data_dir: Path):
         self._reload_lock = threading.Lock()
@@ -158,7 +199,12 @@ class ContestStore:
             except Exception as e:
                 logger.exception("Failed to load %s: %s", path.name, e)
 
-        global_summary = self._finalize_contests(contests, problems)
+        try:
+            global_summary = self._finalize_contests(contests, problems)
+        except Exception:
+            logger.exception("Failed to build contest summaries; serving data without them")
+            global_summary = self._build_global_summary({}, [])
+
         self._swap(raw_files, problems, contests, mtimes, global_summary)
         logger.info(
             "Loaded %d contest files → %d contests, %d problems",
@@ -188,11 +234,12 @@ class ContestStore:
     def _contest_id_from_file(self, filename: str, data: Dict[str, Any]) -> str:
         stem = Path(filename).stem
         if data.get("title"):
-            return data["title"]
-        if "year" in data:
+            return _as_text(data["title"]) or stem
+        year = _as_optional_int(data.get("year"))
+        if year is not None:
             if "Qualifications" in stem or "qualification" in stem.lower():
-                return f'{data["year"]}-Q'
-            return str(data["year"])
+                return f"{year}-Q"
+            return str(year)
         return stem
 
     def _make_problem_url(self, contest_link: str, letter: str) -> str:
@@ -211,7 +258,8 @@ class ContestStore:
         contest_link: str,
         problem: Dict[str, Any],
     ) -> Dict[str, Any]:
-        letter = problem.get("letter")
+        letter = _as_text(problem.get("letter"))
+        global_index = problem.get("global_index")
         normalized = {
             "contest_id": contest_id,
             "title": title,
@@ -219,16 +267,16 @@ class ContestStore:
             "is_qualification": is_qualification,
             "day": day,
             "letter": letter,
-            "name": problem.get("name"),
-            "solvers": problem.get("solvers", 0),
-            "attempts": problem.get("attempts", 0),
-            "solve_rate": problem.get("solve_rate", 0.0),
-            "difficulty": problem.get("difficulty", "Unknown"),
-            "primary_topic": problem.get("primary_topic", "Unknown"),
-            "secondary_topics": problem.get("secondary_topics", []),
+            "name": _as_text(problem.get("name")),
+            "solvers": _as_number(problem.get("solvers"), 0),
+            "attempts": _as_number(problem.get("attempts"), 0),
+            "solve_rate": _as_number(problem.get("solve_rate"), 0.0),
+            "difficulty": _as_text(problem.get("difficulty")) or "Unknown",
+            "primary_topic": _as_text(problem.get("primary_topic")) or "Unknown",
+            "secondary_topics": _as_text_list(problem.get("secondary_topics")),
             "contest_link": contest_link,
             "problem_url": self._make_problem_url(contest_link, letter) if letter else contest_link,
-            "global_index": problem.get("global_index"),
+            "global_index": _as_text(global_index) if global_index is not None else None,
         }
         return normalized
 
@@ -238,13 +286,10 @@ class ContestStore:
         contest_id = self._contest_id_from_file(filename, data)
 
         if "days" in data:
-            title = data.get("title", contest_id)
-            contest_link = data.get("contest_link", "")
-            year = None
-            for ch in title:
-                if ch.isdigit():
-                    year = int("".join([c for c in title if c.isdigit()][:4])) if any(c.isdigit() for c in title) else None
-                    break
+            title = _as_text(data.get("title")) or contest_id
+            contest_link = _as_text(data.get("contest_link"))
+            digits = "".join(c for c in title if c.isdigit())[:4]
+            year = int(digits) if digits else None
 
             contest = contests.setdefault(contest_id, {
                 "contest_id": contest_id,
@@ -256,8 +301,8 @@ class ContestStore:
             })
 
             for day_block in data.get("days", []):
-                day_num = int(day_block.get("day", 0))
-                day_link = day_block.get("contest_link", "") or contest_link
+                day_num = _as_optional_int(day_block.get("day")) or 0
+                day_link = _as_text(day_block.get("contest_link")) or contest_link
 
                 contest["days"].setdefault(day_num, [])
                 for problem in day_block.get("problems", []):
@@ -275,10 +320,10 @@ class ContestStore:
             return
 
         if "problems" in data:
-            year = data.get("year")
-            day_num = int(data.get("day", 0))
+            year = _as_optional_int(data.get("year"))
+            day_num = _as_optional_int(data.get("day")) or 0
             title = f"ECPC{year}" if year is not None else contest_id
-            contest_link = data.get("contest_link", "")
+            contest_link = _as_text(data.get("contest_link"))
 
             contest = contests.setdefault(contest_id, {
                 "contest_id": contest_id,
@@ -306,19 +351,24 @@ class ContestStore:
     def _finalize_contests(self, contests: Dict[str, Dict[str, Any]],
                            all_problems: List[Dict[str, Any]]) -> Dict[str, Any]:
 
-        for contest in contests.values():
-            days_dict = contest.get("days", {})
-            sorted_days = sorted(days_dict.items(), key=lambda x: x[0])
+        for contest_id, contest in contests.items():
+            try:
+                days_dict = contest.get("days", {})
+                sorted_days = sorted(days_dict.items(), key=lambda x: x[0])
 
-            contest_problems = []
-            day_summaries = []
+                contest_problems = []
+                day_summaries = []
 
-            for day_num, problems in sorted_days:
-                contest_problems.extend(problems)
-                day_summaries.append(self._build_day_summary(contest, day_num, problems))
+                for day_num, problems in sorted_days:
+                    contest_problems.extend(problems)
+                    day_summaries.append(self._build_day_summary(contest, day_num, problems))
 
-            contest["days"] = day_summaries
-            contest["summary"] = self._build_contest_summary(contest, contest_problems)
+                contest["days"] = day_summaries
+                contest["summary"] = self._build_contest_summary(contest, contest_problems)
+            except Exception:
+                logger.exception("Failed to summarize contest %s; serving it empty", contest_id)
+                contest["days"] = []
+                contest["summary"] = self._build_contest_summary(contest, [])
 
         return self._build_global_summary(contests, all_problems)
 
