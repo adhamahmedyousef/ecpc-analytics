@@ -6,6 +6,18 @@
 const API = '';  
 
 
+/**
+ * Returns a debounced version of `fn` that delays invocation
+ * until `delay` ms have elapsed since the last call.
+ */
+function debounce(fn, delay = 300) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
 async function apiFetch(path) {
   try {
     const res = await fetch(API + path);
@@ -184,4 +196,47 @@ async function loadSidebarContests() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadSidebarContests();
+
+  // --- Mobile sidebar toggle ---
+  const sidebar  = document.getElementById('sidebar');
+  const toggle   = document.getElementById('sidebar-toggle');
+  const overlay  = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    // Need a frame to transition opacity from 0
+    requestAnimationFrame(() => overlay.style.display = 'block');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!overlay.classList.contains('active')) overlay.style.display = '';
+    }, 250);
+  }
+
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+  }
+  if (overlay) {
+    overlay.addEventListener('click', closeSidebar);
+  }
+
+  // Close sidebar when a nav link inside it is clicked (mobile)
+  sidebar?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeSidebar();
+    });
+  });
+
+  // Auto-close sidebar when resizing past breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) closeSidebar();
+  });
 });

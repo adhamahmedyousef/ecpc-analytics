@@ -60,17 +60,52 @@ The project follows a simple and effective structure:
 
 ## Run Locally
 
-Install dependencies:
+**1. Install dependencies:**
 
+```bash
 pip install -r requirements.txt
+```
 
-Run the application:
+**2. Configure environment:**
 
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and set at minimum:
+
+- `SECRET_KEY` — a random secret string (required for production)
+- `ADMIN_API_KEY` — a random key to authorize the `/api/refresh` endpoint
+
+**3. Run the development server:**
+
+```bash
 python app/app.py
+```
 
-Open in browser:
+Open in browser: [http://localhost:5000](http://localhost:5000)
 
-http://localhost:5000
+## Production Deployment
+
+For production, use [Gunicorn](https://gunicorn.org/) instead of the built-in dev server:
+
+```bash
+gunicorn -w 4 -b 0.0.0.0:5000 app.app:app
+```
+
+### Environment Variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `SECRET_KEY` | `dev-insecure-key` | Flask secret key — **set this in production** |
+| `FLASK_DEBUG` | `0` | Set to `1` to enable debug mode |
+| `CORS_ORIGINS` | `*` | Comma-separated allowed origins |
+| `HOST` | `0.0.0.0` | Server bind address |
+| `PORT` | `5000` | Server port |
+| `LOG_LEVEL` | `INFO` | Logging level (DEBUG, INFO, WARNING, ERROR) |
+| `ADMIN_API_KEY` | *(empty)* | Required to call `/api/refresh` |
+| `RATE_LIMIT` | `60/minute` | Rate limit per IP, per endpoint |
+| `TRUSTED_PROXIES` | `0` | Proxy hops in front of the app — set when behind a reverse proxy so rate limits key on the real client IP |
 
 ## Access to Problems
 
@@ -84,16 +119,19 @@ This archive is one of the main and most reliable sources for Egyptian contests,
 
 ## Project Structure
 
-app/  
- app.py  
- templates/  
- static/  
- ICPCRoad/  
-
-screenshots/  
-README.md  
-LICENSE  
-requirements.txt  
+```
+app/
+  app.py
+  templates/
+  static/
+  ICPCRoad/
+screenshots/
+.env.example
+.gitignore
+README.md
+LICENSE
+requirements.txt
+```
 
 ## Author
 
