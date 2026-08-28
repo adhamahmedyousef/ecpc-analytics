@@ -479,7 +479,7 @@ class ContestStore:
                 "total_problems": c.get("summary", {}).get("total_problems", 0),
                 "summary": c.get("summary", {}),
             }
-            for c in sorted(self.contests.values(), key=lambda x: (x["is_qualification"], x.get("year", 0), x["contest_id"]))
+            for c in sorted(self.contests.values(), key=lambda x: (x["is_qualification"], x.get("year") or 0, x["contest_id"]))
         ]
 
     def get_contest(self, contest_id: str) -> Optional[Dict[str, Any]]:
