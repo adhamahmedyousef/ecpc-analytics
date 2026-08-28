@@ -192,9 +192,12 @@ class ContestStore:
 
         for path in sorted(self.data_dir.glob("*.json")):
             try:
+                # Record the mtime before parsing. A file that fails to parse
+                # must still be tracked, or _needs_reload() sees a permanent
+                # file-count mismatch and reloads on every single request.
+                mtimes[path.name] = path.stat().st_mtime
                 data = self._read_json_file(path)
                 raw_files[path.name] = data
-                mtimes[path.name] = path.stat().st_mtime
                 self._ingest_file(path.name, data, contests, problems)
             except Exception as e:
                 logger.exception("Failed to load %s: %s", path.name, e)
