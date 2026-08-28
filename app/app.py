@@ -3,7 +3,7 @@ import logging
 import os
 import threading
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, NamedTuple, Optional
 from collections import Counter, defaultdict
 from flask import render_template
 from flask import Flask, jsonify, request
@@ -156,16 +156,58 @@ def _as_text_list(value: Any) -> List[str]:
     return [_as_text(v) for v in value if v is not None]
 
 
+class _Snapshot(NamedTuple):
+    """One immutable view of the loaded data.
+
+    Readers take the whole thing in a single attribute read, so they can never
+    observe a new problem list against a stale summary.
+    """
+
+    raw_files: Dict[str, Any]
+    problems: List[Dict[str, Any]]
+    contests: Dict[str, Dict[str, Any]]
+    mtimes: Dict[str, float]
+    global_summary: Dict[str, Any]
+
+
+_EMPTY_SNAPSHOT = _Snapshot({}, [], {}, {}, {})
+
+
 class ContestStore:
     def __init__(self, data_dir: Path):
         self._reload_lock = threading.Lock()
         self.data_dir = data_dir
-        self.raw_files: Dict[str, Any] = {}
-        self.problems: List[Dict[str, Any]] = []
-        self.contests: Dict[str, Dict[str, Any]] = {}
-        self.mtimes: Dict[str, float] = {}
-        self.global_summary: Dict[str, Any] = {}
+        self._data = _EMPTY_SNAPSHOT
         self.load()
+
+    def snapshot(self) -> _Snapshot:
+        """Bind the current data once.
+
+        Each property below is a single read of ``_data``, so two of them in a
+        row can straddle a reload. Callers needing more than one field should
+        take a snapshot instead.
+        """
+        return self._data
+
+    @property
+    def raw_files(self) -> Dict[str, Any]:
+        return self._data.raw_files
+
+    @property
+    def problems(self) -> List[Dict[str, Any]]:
+        return self._data.problems
+
+    @property
+    def contests(self) -> Dict[str, Dict[str, Any]]:
+        return self._data.contests
+
+    @property
+    def mtimes(self) -> Dict[str, float]:
+        return self._data.mtimes
+
+    @property
+    def global_summary(self) -> Dict[str, Any]:
+        return self._data.global_summary
 
     def _read_json_file(self, path: Path) -> Any:
         with open(path, "r", encoding="utf-8") as f:
@@ -178,14 +220,15 @@ class ContestStore:
         if not self.data_dir.exists():
             return False
 
+        mtimes = self._data.mtimes          # bind once; must not straddle a swap
         current_files = list(self.data_dir.glob("*.json"))
-        if len(current_files) != len(self.mtimes):
+        if len(current_files) != len(mtimes):
             return True
 
         for p in current_files:
             key = self._file_id(p)
             mtime = p.stat().st_mtime
-            if key not in self.mtimes or self.mtimes[key] != mtime:
+            if key not in mtimes or mtimes[key] != mtime:
                 return True
         return False
 
@@ -202,7 +245,7 @@ class ContestStore:
             self._load_internal()
 
     def _load_internal(self) -> None:
-        """Build new data structures and swap them in atomically.
+        """Build a new snapshot and publish it.
 
         Must be called while holding ``_reload_lock``.
         """
@@ -213,7 +256,7 @@ class ContestStore:
 
         if not self.data_dir.exists():
             logger.warning("Data directory does not exist: %s", self.data_dir)
-            self._swap(raw_files, problems, contests, mtimes, {})
+            self._data = _EMPTY_SNAPSHOT
             return
 
         for path in sorted(self.data_dir.glob("*.json")):
@@ -234,31 +277,13 @@ class ContestStore:
             logger.exception("Failed to build contest summaries; serving data without them")
             global_summary = self._build_global_summary({}, [])
 
-        self._swap(raw_files, problems, contests, mtimes, global_summary)
+        # The one and only publish: a single attribute assignment, which is
+        # atomic under the GIL, so readers get the old snapshot or the new one.
+        self._data = _Snapshot(raw_files, problems, contests, mtimes, global_summary)
         logger.info(
             "Loaded %d contest files → %d contests, %d problems",
-            len(self.raw_files), len(self.contests), len(self.problems),
+            len(raw_files), len(contests), len(problems),
         )
-
-    def _swap(
-        self,
-        raw_files: Dict[str, Any],
-        problems: List[Dict[str, Any]],
-        contests: Dict[str, Dict[str, Any]],
-        mtimes: Dict[str, float],
-        global_summary: Dict[str, Any],
-    ) -> None:
-        """Replace all data references in one go.
-
-        In CPython each attribute assignment is atomic (GIL), so concurrent
-        readers will see either the old or the new reference — never a
-        partially-constructed data structure.
-        """
-        self.raw_files = raw_files
-        self.problems = problems
-        self.contests = contests
-        self.mtimes = mtimes
-        self.global_summary = global_summary
 
     def _contest_id_from_file(self, filename: str, data: Dict[str, Any]) -> str:
         stem = Path(filename).stem
@@ -508,12 +533,12 @@ class ContestStore:
                 "total_problems": c.get("summary", {}).get("total_problems", 0),
                 "summary": c.get("summary", {}),
             }
-            for c in sorted(self.contests.values(), key=lambda x: (x["is_qualification"], x.get("year") or 0, x["contest_id"]))
+            for c in sorted(self._data.contests.values(), key=lambda x: (x["is_qualification"], x.get("year") or 0, x["contest_id"]))
         ]
 
     def get_contest(self, contest_id: str) -> Optional[Dict[str, Any]]:
         self.maybe_reload()
-        return self.contests.get(contest_id)
+        return self._data.contests.get(contest_id)
 
     def get_day(self, contest_id: str, day: int) -> Optional[Dict[str, Any]]:
         contest = self.get_contest(contest_id)
@@ -533,7 +558,7 @@ class ContestStore:
         day: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
         self.maybe_reload()
-        result = self.problems
+        result = self._data.problems
 
         if contest_id:
             result = [p for p in result if p["contest_id"] == contest_id]
