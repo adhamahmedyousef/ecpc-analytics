@@ -75,7 +75,7 @@ const CONTEST_ID = {{ contest_id | tojson }};
 const DAY = {{ day }};
 
 (async function() {
-  const data = await apiFetch(`/api/contests/${encodeURIComponent(CONTEST_ID)}/days/${DAY}`);
+  const data = await apiFetch(`/api/stats/day?contest_id=${encodeURIComponent(CONTEST_ID)}&day=${DAY}`);
   if (!data) {
     document.getElementById('day-body').innerHTML = '<div class="text-red-400">Day not found</div>';
     return;
