@@ -180,7 +180,9 @@
         {"letter":"M","name":"Memphis","solvers":8,"attempts":12,"solve_rate":66.7,"difficulty":"Hard","primary_topic":"Tree","secondary_topics":["Dynamic Programming","Floyd Warshall","Graph","Shortest Paths","Subtree","Optimization"],"global_index":"2023-Q-D9-M"},
         {"letter":"N","name":"Nefertiti","solvers":119,"attempts":160,"solve_rate":74.4,"difficulty":"Medium","primary_topic":"Graph","secondary_topics":["BFS","Grid","Multi-Source BFS","Simulation"],"global_index":"2023-Q-D9-N"}
       ]
-    },{
+    },
+    {
+      "day": 10,
       "contest_link": "https://codeforces.com/group/Rilx5irOux/contest/484436",
       "problems": [
         {"letter":"A","name":"Ancient","solvers":214,"attempts":230,"solve_rate":93.0,"difficulty":"Easy","primary_topic":"Math","secondary_topics":["Simulation","Observation","Greedy"],"global_index":"2023-Q-D10-A"},
