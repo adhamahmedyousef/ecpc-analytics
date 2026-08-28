@@ -83,7 +83,7 @@ const DAY = {{ day }};
 
   document.getElementById('day-title').textContent = `${CONTEST_ID} — Day ${DAY}`;
   document.getElementById('d-total').textContent = data.total_problems ?? '—';
-  document.getElementById('d-rate').textContent = data.avg_solve_rate !== undefined ? (data.avg_solve_rate*100).toFixed(1)+'%' : '—';
+  document.getElementById('d-rate').textContent = data.avg_solve_rate !== undefined ? (data.avg_solve_rate).toFixed(1)+'%' : '—';
 
   const dc = data.difficulty_counts || {};
   document.getElementById('d-easy').textContent = dc['Easy'] ?? 0;
@@ -127,7 +127,7 @@ function renderProblemList(elId, problems) {
       </div>
       <div class="flex items-center gap-2 ml-auto">
         <span class="diff-badge diff-${(p.difficulty||'unknown').toLowerCase().replace(' ','-')}">${p.difficulty}</span>
-        <span class="text-xs text-gray-500">${p.solve_rate!==undefined?(p.solve_rate*100).toFixed(1)+'%':''}</span>
+        <span class="text-xs text-gray-500">${p.solve_rate!==undefined?(p.solve_rate).toFixed(1)+'%':''}</span>
       </div>
     </a>
   `).join('');
